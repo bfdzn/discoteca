@@ -1,5 +1,10 @@
 package modelos;
 
-public class ParteHoras {
+import java.time.LocalDate;
 
+public class ParteHoras {
+	String dniEmpleado;
+	LocalDate fecha;
+	
+	
 }
