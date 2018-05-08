@@ -23,7 +23,7 @@ public class Principal {
 			String usuario = sc.nextLine();
 			System.out.println("Introduce contraseña");
 			String password = sc.nextLine();
-			
+			System.out.println("Hola");
 		
 		
 		}
