@@ -1,4 +1,4 @@
-package conector;
+package bbdd;
 /*
  * 
 Lee los datos de un archivo de propiedades
