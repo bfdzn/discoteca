@@ -9,7 +9,5 @@ public class Admin extends Empleado {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	
-
 }

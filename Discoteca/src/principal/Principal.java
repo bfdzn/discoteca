@@ -11,6 +11,7 @@ public class Principal {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		BD_Empleado bdempleado = new BD_Empleado("mysql-properties.xml");
+		int filas = 0;
 
 		int opcion = 0;
 		while (opcion != 1 && opcion != 2) {
@@ -55,14 +56,15 @@ public class Principal {
 					System.out.println("6.Salir programa");
 					opcion = sc.nextInt();
 					sc.nextLine();
-					
-					switch(opcion) {
+
+					switch (opcion) {
 					case 1:
-						
+						System.out.println("Introduce el nombre del espectáculo para boorarlo");
+						String nEspectaculoBuscar = sc.nextLine();
 						break;
-						
+
 					case 2:
-						
+
 						break;
 					case 3:
 						break;
@@ -71,18 +73,42 @@ public class Principal {
 					case 5:
 						System.out.println("Introduce dni empleado");
 						String dniBorrar = sc.nextLine();
-					
-					
-					
+						filas = 0;
+						filas = bdempleado.borrarEmpleado(dniBorrar);
+						switch (filas) {
+						case 1:
+							System.out.println("Empleado borrado");
+							break;
+						case 0:
+							System.out.println("Empleado no borrado");
+							break;
+						case -1:
+							System.out.println("Problemas técnicos");
+							break;
+
+						}
+						break;
+
 					}
 
 				}
 
 			} else {
+				opcion = 0;
 
-				System.out.println("Introduce opción");
-				System.out.println("1.Mandar informe");
-				System.out.println("2.Vender entrada");
+				while (opcion != 3) {
+					System.out.println("Introduce opción");
+					System.out.println("1.Mandar informe");
+					System.out.println("2.Vender entrada");
+					opcion = sc.nextInt();
+
+					switch (opcion) {
+					case 1:
+						
+
+					}
+
+				}//cierre while
 
 			}
 

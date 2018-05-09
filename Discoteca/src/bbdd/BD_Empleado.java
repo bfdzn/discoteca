@@ -52,6 +52,24 @@ public class BD_Empleado extends BD_Conector{
 		}
 	}
 	
+	public int borrarEmpleado(String dni){
+		String cadena="DELETE FROM empleados2 WHERE nombre='" +  dni.toUpperCase() + "'";	
+		
+		try{
+		this.abrir();
+		s=c.createStatement();
+		int filas=s.executeUpdate(cadena);	
+		s.close();
+		this.cerrar();
+		return filas;
+		
+		}
+		catch ( SQLException e){
+			this.cerrar();
+			return -1;
+		}
+	}
+	
 	
 
 }
