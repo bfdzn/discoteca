@@ -8,8 +8,9 @@ public class Empleado {
 	private String nombre;
 	private String apellido;
 	private String oficio;
-	private String contraseña;
 	private LocalDate fechaAlta;
+	private String contraseña;
+
 	public String getDni() {
 		return dni;
 	}
@@ -46,5 +47,16 @@ public class Empleado {
 	public void setFechaAlta(LocalDate fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
+	public Empleado(String dni, String nombre, String apellido, String oficio, LocalDate fechaAlta, String contraseña) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.oficio = oficio;
+		this.fechaAlta = fechaAlta;
+		this.contraseña = contraseña;
+	}
+	
+	
 	
 }

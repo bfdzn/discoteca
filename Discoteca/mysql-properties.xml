@@ -4,9 +4,9 @@
 
   <entry key="dbms">mysql</entry>
   <entry key="driver">com.mysql.jdbc.Driver</entry>
-  <entry key="database_name">colegio</entry>
+  <entry key="database_name">discoteca</entry>
   <entry key="user_name">root</entry>
-  <entry key="password"></entry>
+  <entry key="password">root</entry>
   <entry key="server_name">localhost</entry>
   <entry key="port_number">3306</entry>
 
