@@ -27,6 +27,7 @@ public class ParteHoras {
 
 	public void setDniEmpleado(String dniEmpleado) {
 		this.dniEmpleado = dniEmpleado;
+		//hola
 	}
 
 
