@@ -59,7 +59,7 @@ public class Principal {
 
 					switch (opcion) {
 					case 1:
-						System.out.println("Introduce el nombre del espectáculo para boorarlo");
+						System.out.println("Introduce el nombre del espectáculo para borrarlo");
 						String nEspectaculoBuscar = sc.nextLine();
 						break;
 
