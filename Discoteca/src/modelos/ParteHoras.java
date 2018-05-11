@@ -7,11 +7,11 @@ import java.time.LocalDate;
 public class ParteHoras {
 	private String dniEmpleado;
 	private LocalDate fecha;
-	private Double horas;
+	private int horas;
 	private double salario;
 	
 	
-	public ParteHoras(String dniEmpleado, LocalDate fecha, Double horas, double salario) {
+	public ParteHoras(String dniEmpleado, LocalDate fecha, int horas, double salario) {
 		super();
 		this.dniEmpleado = dniEmpleado;
 		this.fecha = fecha;
@@ -40,12 +40,12 @@ public class ParteHoras {
 	}
 
 
-	public Double getHoras() {
+	public int getHoras() {
 		return horas;
 	}
 
 
-	public void setHoras(Double horas) {
+	public void setHoras(int horas) {
 		this.horas = horas;
 	}
 
