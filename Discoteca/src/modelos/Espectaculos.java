@@ -8,6 +8,7 @@ public class Espectaculos {
 	private String nombreEspectaculo;
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
+	private int aforo=200;
 	
 	
 	public Espectaculos(int idEspectaculo, String nombreEspectaculo, LocalDate fechaInicio, LocalDate fechaFin) {
@@ -56,6 +57,11 @@ public class Espectaculos {
 
 	public void setFechaFin(LocalDate fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+
+	public int getAforo() {
+		return aforo;
 	}
 	
 	

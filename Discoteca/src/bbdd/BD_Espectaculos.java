@@ -18,11 +18,9 @@ public class BD_Espectaculos extends BD_Conector {
 
 
 
-
-
 	public  int añadir_Espectaculo( Espectaculos espectaculo){	
 		String cadenaSQL="INSERT INTO ESPECTACULOS VALUES('" + espectaculo.getIdEspectaculo() + "','" +
-				espectaculo.getNombreEspectaculo() + "','" + espectaculo.getFechaInicio() + "','" + espectaculo.getFechaFin() + "')"; 
+				espectaculo.getNombreEspectaculo() + "','" + espectaculo.getFechaInicio() + "','" + espectaculo.getFechaFin() + "','" + espectaculo.getAforo() + "')"; 
 		
 		try{
 			this.abrir();
@@ -77,6 +75,24 @@ public class BD_Espectaculos extends BD_Conector {
 			return null;
 			
 		}
+	}
+	
+	public int modificar_FechaEspectaculo(Espectaculos espectaculo,LocalDate fechaInicio, LocalDate fechaFin) {
+		String cadenaSQL="UPDATE ESPECTACULOS2 SET fecha_inicion ='"+ fechaInicio + "','"+ "fecha_fin= '" + fechaFin + "'  WHERE idespectaculo = ' " + espectaculo.getIdEspectaculo() + " ' ";
+		
+		try{
+			this.abrir();
+			s=c.createStatement();
+			int filas=s.executeUpdate(cadenaSQL);
+			s.close();
+			this.cerrar();
+			return filas;
+			}
+			catch ( SQLException e){			
+				return -1;
+			
+		
+			}
 	}
 	
 }
