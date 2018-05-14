@@ -1,5 +1,6 @@
 package principal;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import bbdd.*;
@@ -11,6 +12,8 @@ public class Principal {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		BD_Empleado bdempleado = new BD_Empleado("mysql-properties.xml");
+		BD_parte_horas bdhoras = new BD_parte_horas("mysql-properties.xml");
+
 		int filas = 0;
 
 		int opcion = 0;
@@ -104,7 +107,23 @@ public class Principal {
 
 					switch (opcion) {
 					case 1:
-						
+						System.out.println("Introduce numero horas");
+						int horas = sc.nextInt();
+						filas = 0;
+						filas = bdhoras.añadir_parte_horas(usuario.getDni(), LocalDate.now(), horas, usuario.get);
+						switch (filas) {
+						case 1:
+							System.out.println("Parte horas añadido");
+							break;
+						case 0:
+							System.out.println("Parte de horas no añadido");
+							break;
+						case -1:
+							System.out.println("Problemas técnicos");
+							break;
+
+						}
+						break;
 
 					}
 
