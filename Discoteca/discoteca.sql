@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `empleados2` (
   `OFICIO` varchar(12) NOT NULL,
   `FECHA_ALTA` date NOT NULL,
   `CONTRASEÑA` varchar(12) NOT NULL,
+  `PRECIO_HORA` decimal(11,2) NOT NULL,
   PRIMARY KEY (`DNI_EMPLEADO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -63,8 +64,8 @@ CREATE TABLE IF NOT EXISTS `empleados2` (
 -- Volcado de datos para la tabla `empleados2`
 --
 
-INSERT INTO `empleados2` (`DNI_EMPLEADO`, `NOMBRE`, `APELLIDO`, `OFICIO`, `FECHA_ALTA`, `CONTRASEÑA`) VALUES
-('00000000A', 'Pepe', 'Garcia', 'VENDEDOR', '2000-05-01', 'a1a1a1a1');
+INSERT INTO `empleados2` (`DNI_EMPLEADO`, `NOMBRE`, `APELLIDO`, `OFICIO`, `FECHA_ALTA`, `CONTRASEÑA`,`PRECIO_HORA`) VALUES
+('00000000A', 'Pepe', 'Garcia', 'VENDEDOR', '2000-05-01', 'a1a1a1a1', '5');
 
 -- --------------------------------------------------------
 
@@ -122,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `parte_horas2` (
   `DNI_EMPLEADO` varchar(9) NOT NULL,
   `FECHA` date NOT NULL,
   `HORAS` int(2) NOT NULL,
-  `SALARIO` decimal(11,2) NOT NULL,
+  `IMPORTE` decimal(11,2) NOT NULL,
   PRIMARY KEY (`DNI_EMPLEADO`,`FECHA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -130,8 +131,8 @@ CREATE TABLE IF NOT EXISTS `parte_horas2` (
 -- Volcado de datos para la tabla `parte_horas2`
 --
 
-INSERT INTO `parte_horas2` (`DNI_EMPLEADO`, `FECHA`, `HORAS`, `SALARIO`) VALUES
-('00000000A', '2018-05-07', 6, '60.00');
+INSERT INTO `parte_horas2` (`DNI_EMPLEADO`, `FECHA`, `HORAS`, `IMPORTE`) VALUES
+('00000000A', '2018-05-07', 6, '5');
 
 -- --------------------------------------------------------
 

@@ -27,12 +27,12 @@ public class BD_parte_horas extends BD_Conector{
 	
 	
 	
-	public int añadir_parte_horas (String vendedor,LocalDate fecha,int horas,Double salario) {
+	public int añadir_parte_horas (String dni,LocalDate fecha,int horas,Double precioHoras) {
+		double importe = horas*precioHoras;
 		
 		
-		
-		String cadenaSQL="INSERT INTO parte_horas2 VALUES('" + vendedor + "','" +  fecha.getYear() + "-" + fecha.getMonthValue() + "-"
-		  + fecha.getDayOfMonth() + "','" + 	horas + "','" + salario + "')";
+		String cadenaSQL="INSERT INTO parte_horas2 VALUES('" + dni + "','" +  fecha.getYear() + "-" + fecha.getMonthValue() + "-"
+		  + fecha.getDayOfMonth() + "','" + 	horas + "','" + importe + "')";
 		try{
 			this.abrir();
 			s=c.createStatement();
@@ -62,7 +62,7 @@ public class BD_parte_horas extends BD_Conector{
 				LocalDate fecha1=f1.toLocalDate();
 				if(reg.getString("DNI_EMPLEADO").equals(dni)) {
 				lista_parte_horas.add(new ParteHoras(reg.getString("DNI_EMPLEADO"),
-						fecha1,reg.getInt("HORAS"),reg.getDouble("PRECIO")));
+						fecha1,reg.getInt("HORAS"),reg.getDouble("IMPORTE")));
 				}
 
 				}
@@ -89,7 +89,7 @@ public class BD_parte_horas extends BD_Conector{
 				LocalDate fecha1=f1.toLocalDate();
 				if(reg.getDate("FECHA").compareTo(fecha)==0) {
 				lista_parte_horas.add(new ParteHoras(reg.getString("DNI_EMPLEADO"),
-						fecha1,reg.getInt("HORAS"),reg.getDouble("PRECIO")));
+						fecha1,reg.getInt("HORAS"),reg.getDouble("IMPORTE")));
 				}
 
 				}

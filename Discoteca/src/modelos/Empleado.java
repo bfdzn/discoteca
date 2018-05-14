@@ -7,10 +7,16 @@ import java.util.Vector;
 public class Empleado {
 	private String dni;
 	private String nombre;
+	@Override
+	public String toString() {
+		return "Empleado [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", oficio=" + oficio
+				+ ", fechaAlta=" + fechaAlta + ", contraseña=" + contraseña + ", precioHora=" + precioHora + "]";
+	}
 	private String apellido;
 	private String oficio;
 	private LocalDate fechaAlta;
 	private String contraseña;
+	private double precioHora;
 
 	public String getDni() {
 		return dni;
@@ -48,7 +54,7 @@ public class Empleado {
 	public void setFechaAlta(LocalDate fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
-	public Empleado(String dni, String nombre, String apellido, String oficio, LocalDate fechaAlta, String contraseña) {
+	public Empleado(String dni, String nombre, String apellido, String oficio, LocalDate fechaAlta, String contraseña,double precioHora) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -56,6 +62,13 @@ public class Empleado {
 		this.oficio = oficio;
 		this.fechaAlta = fechaAlta;
 		this.contraseña = contraseña;
+		this.precioHora = precioHora;
+	}
+	public double getPrecioHora() {
+		return precioHora;
+	}
+	public void setPrecioHora(double precioHora) {
+		this.precioHora = precioHora;
 	}
 	
 	
