@@ -18,7 +18,7 @@ public class BD_Entradas extends BD_Conector {
 	
 	public int añadir_Entrada (Entradas entrada)
 	{
-		String cadenaSQL="INSERT INTO ESPECTACULOS VALUES('"+ entrada.getNumEntrada() +  "','" + entrada.getDniEntrada() + "','" + entrada.getIdEspectaculo() +
+		String cadenaSQL="INSERT INTO entradas2 VALUES('"+ entrada.getNumEntrada() +  "','" + entrada.getDniEntrada() + "','" + entrada.getIdEspectaculo() +
 				 "','" + entrada.getFecha() +  "','" + entrada.getVendedor() + "')";
 		
 		try{

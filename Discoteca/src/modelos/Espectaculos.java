@@ -18,6 +18,13 @@ public class Espectaculos {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
+	
+
+	@Override
+	public String toString() {
+		return "Espectaculos [idEspectaculo=" + idEspectaculo + ", nombreEspectaculo=" + nombreEspectaculo
+				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", aforo=" + aforo + "]";
+	}
 
 
 	public int getIdEspectaculo() {

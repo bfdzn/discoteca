@@ -82,7 +82,36 @@ public class BD_Espectaculos extends BD_Conector {
 			return 2;			
 		}
 	}
+	public Vector<Espectaculos> listarEspectaculos () {
+		
+		String cadena="SELECT * FROM espectaculos2 ";
+		Vector<Espectaculos> listaEspectaculos=new Vector<Espectaculos>();
+
+		try{
+			Espectaculos espectaculoBuscar=null;
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadena);
+			while ( reg.next()) {	
+				
+				java.sql.Date f=reg.getDate("FECHA_INICIO");
+				LocalDate fecha1=f.toLocalDate();
+				java.sql.Date f2=reg.getDate("FECHA_FIN");
+				LocalDate fecha2=f2.toLocalDate();
+				
+				espectaculoBuscar = new Espectaculos(reg.getInt("IDESPECTACULO"), reg.getString("NOMBRE"),fecha1,fecha2);	
+				listaEspectaculos.add(espectaculoBuscar);
+			}
+			s.close();
+			this.cerrar();
+			return listaEspectaculos;
+		}
+		catch ( SQLException e){
 	
+			return null;
+			
+		}
+	}
 	
 	
 	public Espectaculos buscarEspectaculo (int espectaculo) {

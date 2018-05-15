@@ -17,6 +17,28 @@ public class BD_Empleado extends BD_Conector {
 	public BD_Empleado(String file) {
 		super(file);
 	}
+	
+	public  int añadir_Empleado( Empleado al){	
+		String cadenaSQL="INSERT INTO alumnos VALUES('" + al.getDni() + "','" +
+		al.getDni()+"','"+ al.getNombre() +"','"+ al.getApellido()+"','"+
+				al.getOficio()+"','"+al.getFechaAlta()+"','"+al.getContraseña()+"','"+al.getPrecioHora()+"')"; 	
+		
+		try{
+		this.abrir();
+		s=c.createStatement();
+		int filas=s.executeUpdate(cadenaSQL);
+		s.close();
+		this.cerrar();
+		return filas;
+		}
+		catch ( SQLException e){			
+			return -1;
+		}
+	}
+	
+	
+	
+	
 
 	public Empleado buscarEmpleado(String dni, String contraseña) {
 		String cadenaSQL = "SELECT * from empleados2 WHERE DNI_EMPLEADO='" + dni + "'";

@@ -45,10 +45,6 @@ public class BD_parte_horas extends BD_Conector{
 				return -1;
 			}
 	}
-	
-
-	
-	
 	public  Vector<ParteHoras> Listar_parte_horas_dni(String dni){
 		String cadenaSQL="SELECT * from parte_horas2 ";
 		Vector<ParteHoras> lista_parte_horas=new Vector<ParteHoras>();
@@ -60,6 +56,7 @@ public class BD_parte_horas extends BD_Conector{
 			while ( reg.next()){
 				java.sql.Date f1=reg.getDate("FECHA");
 				LocalDate fecha1=f1.toLocalDate();
+				
 				if(reg.getString("DNI_EMPLEADO").equals(dni)) {
 				lista_parte_horas.add(new ParteHoras(reg.getString("DNI_EMPLEADO"),
 						fecha1,reg.getInt("HORAS"),reg.getDouble("IMPORTE")));
@@ -74,6 +71,34 @@ public class BD_parte_horas extends BD_Conector{
 			return null;			
 		}
 	}
+
+	public  Vector<ParteHoras> Listar_parte_horas_mes_dni(int mes, String dni){
+		String cadenaSQL="SELECT * from parte_horas2 WHERE DNI_EMPLEADO='"+dni+"'";
+		Vector<ParteHoras> lista_parte_horas=new Vector<ParteHoras>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			
+			while ( reg.next()){
+				java.sql.Date f1=reg.getDate("FECHA");
+				LocalDate fecha1=f1.toLocalDate();
+				if(fecha1.getMonthValue() == mes) {
+				lista_parte_horas.add(new ParteHoras(reg.getString("DNI_EMPLEADO"),
+						fecha1,reg.getInt("HORAS"),reg.getDouble("IMPORTE")));
+				}
+
+				}
+			s.close();
+			this.cerrar();
+			return lista_parte_horas;
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
+	
+
 	
 	
 	public  Vector<ParteHoras> Listar_parte_horas_fecha(Date fecha){

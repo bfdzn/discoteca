@@ -9,6 +9,7 @@ import bbdd.*;
 import modelos.Admin;
 import modelos.Empleado;
 import modelos.Espectaculos;
+import modelos.ParteHoras;
 
 public class Principal {
 
@@ -55,10 +56,10 @@ public class Principal {
 				opcion = 0;
 				while (opcion != 6) {
 					System.out.println("Introduce opción");
-					System.out.println("1.Alta espectáculo/Listar espectáculos");
+					System.out.println("1.Alta espectáculo/Borrar Espectaculo/Listar espectáculos");
 					System.out.println("2.Alta/Baja alquiler sala");
 					System.out.println("3.Revisar informe de horas");
-					System.out.println("4.Revisar facturas");
+					System.out.println("4.Revisar facturación por mes");
 					System.out.println("5.Alta Empleado");
 					System.out.println("6.Salir programa");
 					opcion = sc.nextInt();
@@ -67,9 +68,10 @@ public class Principal {
 					switch (opcion) {
 					case 1:
 						opcion = 0;
-						while (opcion != 3) {
+						while (opcion != 4) {
 							System.out.println("1.Alta espectáculo");
-							System.out.println("2.Listar espectáculos");
+							System.out.println("2.Borrar espectáculo");
+							System.out.println("3.Listar espectáculos");
 							System.out.println("3.Salir");
 							opcion = sc.nextInt();
 							sc.nextLine();
@@ -89,7 +91,7 @@ public class Principal {
 								}
 								LocalDate fechaFin = null;
 								while (fechaFin == null) {
-									System.out.println("Introduce fecha inicio en el siguiente formato dd/LL/yyyy");
+									System.out.println("Introduce fecha fin en el siguiente formato dd/LL/yyyy");
 									String fechaAnotada2 = sc.nextLine();
 									fechaFin = fechaformateada(fechaAnotada2);
 									
@@ -122,19 +124,75 @@ public class Principal {
 								}else {
 									bdespectaculos.borrar_Espectaculo(espectaculoBorrar);
 								}
+								break;
+							case 3:
+								Vector <Espectaculos> listarEspectaculos = bdespectaculos.listarEspectaculos();
+								for(int i=0;i<listarEspectaculos.size();i++) {
+									System.out.println(listarEspectaculos.get(i).toString());
 
+								}
+								break;
 							}
-							break;
+							
 						}
 					case 2:
 
 						break;
 					case 3:
+						System.out.println("Introduzca el mes del cuál quiere sacar el parte de horas");
+						int mes = sc.nextInt();
+						sc.nextLine();
+						System.out.println("Introduzca el dni del empleado del cuál quiere listar las horas");
+						String dniListar = sc.nextLine();
+						Vector <ParteHoras> parteMes = bdhoras.Listar_parte_horas_mes_dni(mes,dniListar);
+						if(parteMes == null) {
+							System.out.println("Fallo del sistema");
+						}else {
+							double salario=0;
+							int horas=0;
+							for(int i=0;i<parteMes.size();i++) {
+								salario=+parteMes.get(i).getSalario();
+								horas=+parteMes.get(i).getHoras();
+							}
+							System.out.println("Al empleado con dni: "+dniListar+"le corresponden: ");
+							System.out.println(salario+" euros por");
+							System.out.println(horas+" horas.");
+						}
+						
 						break;
 					case 4:
+						
+						
+						
+						
+						
 						break;
 					case 5:
-						System.out.println("Introduce dni empleado");
+						System.out.println("Introduce dniEmpleado");
+						String dniEmpleado = sc.nextLine();
+						System.out.println("Introduce nombreEmpleado");
+						String nombreEmpleado = sc.nextLine();
+						System.out.println("Introduce apellidoEmpleado");
+						String apellidoEmpleado = sc.nextLine();
+						System.out.println("Introduce oficio Empleado");
+						String oficio = sc.nextLine();
+						LocalDate fechaAlta = LocalDate.now();
+						System.out.println("Introduce contraseña");
+						String contraseña = sc.nextLine();
+						System.out.println("Introduce precio hora");
+						double precioHora = sc.nextDouble();
+						Empleado alta = new Empleado(dniEmpleado, nombreEmpleado, apellidoEmpleado, oficio, fechaAlta, contraseña, precioHora);
+						filas = 0;
+						filas = bdempleado.añadir_Empleado(alta);
+						if(filas == -1) {
+							System.out.println("Problemas técnicos");
+						}else {
+							System.out.println("Espectáculo añadido");
+						}
+						break;
+					
+						
+						/*System.out.println("Introduce dni empleado");
 						String dniBorrar = sc.nextLine();
 						filas = 0;
 						filas = bdempleado.borrarEmpleado(dniBorrar);
@@ -150,8 +208,10 @@ public class Principal {
 							break;
 
 						}
+						break;*/
+					case 6:
+						System.out.println("Saliendo programa");
 						break;
-
 					}
 
 				}
@@ -187,7 +247,8 @@ public class Principal {
 						break;
 
 					case 2:
-						System.out.println("");
+						System.out.println("Vender entrada");
+						
 
 					}
 

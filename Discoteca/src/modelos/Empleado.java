@@ -7,17 +7,21 @@ import java.util.Vector;
 public class Empleado {
 	private String dni;
 	private String nombre;
-	@Override
-	public String toString() {
-		return "Empleado [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", oficio=" + oficio
-				+ ", fechaAlta=" + fechaAlta + ", contraseña=" + contraseña + ", precioHora=" + precioHora + "]";
-	}
+	
 	private String apellido;
 	private String oficio;
 	private LocalDate fechaAlta;
 	private String contraseña;
 	private double precioHora;
 
+	
+	@Override
+	public String toString() {
+		return "Empleado [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", oficio=" + oficio
+				+ ", fechaAlta=" + fechaAlta + ", contraseña=" + contraseña + ", precioHora=" + precioHora + "]";
+	}
+	
+	
 	public String getDni() {
 		return dni;
 	}
