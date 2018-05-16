@@ -99,7 +99,7 @@ public class BD_Espectaculos extends BD_Conector {
 				java.sql.Date f2=reg.getDate("FECHA_FIN");
 				LocalDate fecha2=f2.toLocalDate();
 				
-				espectaculoBuscar = new Espectaculos(reg.getInt("IDESPECTACULO"), reg.getString("NOMBRE"),fecha1,fecha2);	
+				espectaculoBuscar = new Espectaculos(reg.getInt("IDESPECTACULO"), reg.getString("NOMBRE"),fecha1,fecha2, reg.getDouble("PRECIO_ENTRADA"),reg.getInt("AFORO"));	
 				listaEspectaculos.add(espectaculoBuscar);
 			}
 			s.close();

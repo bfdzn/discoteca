@@ -9,7 +9,7 @@ public class Espectaculos {
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	private double precioEntrada;
-	private int aforo=200;
+	private int aforo;
 	
 	
 	
