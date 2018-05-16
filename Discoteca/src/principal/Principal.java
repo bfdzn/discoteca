@@ -33,7 +33,7 @@ public class Principal {
 		switch (opcion) {
 		case 1:
 			System.out.println("1.Solicitar entradas");
-			System.out.println("2.Solicitar comprar entradas");
+			System.out.println("2.Solicitar reserva entradas");
 			break;
 		case 2:
 			Empleado usuario = null;
@@ -72,7 +72,7 @@ public class Principal {
 							System.out.println("1.Alta espectáculo");
 							System.out.println("2.Borrar espectáculo");
 							System.out.println("3.Listar espectáculos");
-							System.out.println("3.Salir");
+							System.out.println("4.Salir");
 							opcion = sc.nextInt();
 							sc.nextLine();
 							switch (opcion) {
@@ -132,6 +132,8 @@ public class Principal {
 
 								}
 								break;
+							case 4:
+								break;
 							}
 							
 						}
@@ -187,7 +189,7 @@ public class Principal {
 						if(filas == -1) {
 							System.out.println("Problemas técnicos");
 						}else {
-							System.out.println("Espectáculo añadido");
+							System.out.println("Empleado añadido");
 						}
 						break;
 					
