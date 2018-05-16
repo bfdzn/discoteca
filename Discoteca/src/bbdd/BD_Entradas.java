@@ -38,6 +38,7 @@ public class BD_Entradas extends BD_Conector {
 		String cadenaSQL="DELETE FROM ENTRADAS2 WHERE idEspectaculo = ' "+ entrada.getIdEspectaculo() + "'";
 		
 		try{
+			
 			this.abrir();
 			s=c.createStatement();
 			int filas=s.executeUpdate(cadenaSQL);
@@ -51,6 +52,25 @@ public class BD_Entradas extends BD_Conector {
 			
 		
 			}
+	}
+	
+	public int numeroEntrada(Entradas entrada)
+	{
+		String cadenaSQL="SELECT MAX(NUMENTRADA) FROM ENTRADAS WHERE idEspectaculo ='"+ entrada.getIdEspectaculo() + "'";
+		try{
+			int maxEntrada=0;
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			if ( reg.next()) {
+				maxEntrada=reg.getInt(1);
+			}
+			s.close();
+			this.cerrar();
+			return maxEntrada;
+	}catch ( SQLException e){
+		return -1;		
+	}
 	}
 	
 }

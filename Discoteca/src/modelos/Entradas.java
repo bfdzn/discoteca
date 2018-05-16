@@ -2,9 +2,10 @@ package modelos;
 
 import java.time.LocalDate;
 
+
 public class Entradas {
 	
-	private int numEntrada=0;
+	private int numEntrada;
 	private int idEspectaculo;
 	private String dniEntrada;
 	private LocalDate fecha;
@@ -12,13 +13,15 @@ public class Entradas {
 	
 	
 	
-	public Entradas(int idEspectaculo, String dniEntrada, LocalDate fecha, String vendedor) {
+	public Entradas(int numEntrada,int idEspectaculo, String dniEntrada, LocalDate fecha, String vendedor) {
+		
 		super();
+		this.numEntrada=numEntrada;
 		this.idEspectaculo = idEspectaculo;
 		this.dniEntrada = dniEntrada;
 		this.fecha = fecha;
 		this.vendedor = vendedor;
-		numEntrada=numEntrada++;
+		
 	}
 
 	public int getNumEntrada() {
