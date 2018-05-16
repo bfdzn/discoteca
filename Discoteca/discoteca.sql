@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-05-2018 a las 12:09:33
+-- Tiempo de generación: 16-05-2018 a las 08:07:21
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `empleados2` (
   `OFICIO` varchar(12) NOT NULL,
   `FECHA_ALTA` date NOT NULL,
   `CONTRASEÑA` varchar(12) NOT NULL,
-  `PRECIO_HORA` decimal(11,2) NOT NULL,
   PRIMARY KEY (`DNI_EMPLEADO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -64,8 +63,8 @@ CREATE TABLE IF NOT EXISTS `empleados2` (
 -- Volcado de datos para la tabla `empleados2`
 --
 
-INSERT INTO `empleados2` (`DNI_EMPLEADO`, `NOMBRE`, `APELLIDO`, `OFICIO`, `FECHA_ALTA`, `CONTRASEÑA`,`PRECIO_HORA`) VALUES
-('00000000A', 'Pepe', 'Garcia', 'VENDEDOR', '2000-05-01', 'a1a1a1a1', '5');
+INSERT INTO `empleados2` (`DNI_EMPLEADO`, `NOMBRE`, `APELLIDO`, `OFICIO`, `FECHA_ALTA`, `CONTRASEÑA`) VALUES
+('00000000A', 'Pepe', 'Garcia', 'VENDEDOR', '2000-05-01', 'a1a1a1a1');
 
 -- --------------------------------------------------------
 
@@ -79,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `entradas2` (
   `IDESPECTACULO` int(9) NOT NULL,
   `FECHA` date NOT NULL,
   `VENDEDOR` varchar(9) NOT NULL,
-  PRIMARY KEY (`NUMENTRADA`),
+  PRIMARY KEY (`NUMENTRADA`,`IDESPECTACULO`),
   KEY `DNIENTRADA` (`DNIENTRADA`),
   KEY `IDESPECTACULO` (`IDESPECTACULO`),
   KEY `VENDEDOR` (`VENDEDOR`)
@@ -103,6 +102,8 @@ CREATE TABLE IF NOT EXISTS `espectaculos2` (
   `NOMBRE` varchar(20) NOT NULL,
   `FECHA_INICIO` date NOT NULL,
   `FECHA_FIN` date NOT NULL,
+  `PRECIO_ENTRADA` decimal(10,0) NOT NULL,
+  `AFORO` int(11) NOT NULL,
   PRIMARY KEY (`IDESPECTACULO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -110,8 +111,10 @@ CREATE TABLE IF NOT EXISTS `espectaculos2` (
 -- Volcado de datos para la tabla `espectaculos2`
 --
 
-INSERT INTO `espectaculos2` (`IDESPECTACULO`, `NOMBRE`, `FECHA_INICIO`, `FECHA_FIN`) VALUES
-(1, 'rock1', '2019-01-01', '2019-01-02');
+INSERT INTO `espectaculos2` (`IDESPECTACULO`, `NOMBRE`, `FECHA_INICIO`, `FECHA_FIN`, `PRECIO_ENTRADA`, `AFORO`) VALUES
+(1, 'rock1', '2019-01-01', '2019-01-02', '20', 200),
+(2, 'Pop1', '2018-05-01', '2018-05-02', '50', 200),
+(3, 'Hip-Hop', '2018-05-04', '2018-05-05', '35', 200);
 
 -- --------------------------------------------------------
 
@@ -123,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `parte_horas2` (
   `DNI_EMPLEADO` varchar(9) NOT NULL,
   `FECHA` date NOT NULL,
   `HORAS` int(2) NOT NULL,
-  `IMPORTE` decimal(11,2) NOT NULL,
+  `SALARIO` decimal(11,2) NOT NULL,
   PRIMARY KEY (`DNI_EMPLEADO`,`FECHA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -131,8 +134,8 @@ CREATE TABLE IF NOT EXISTS `parte_horas2` (
 -- Volcado de datos para la tabla `parte_horas2`
 --
 
-INSERT INTO `parte_horas2` (`DNI_EMPLEADO`, `FECHA`, `HORAS`, `IMPORTE`) VALUES
-('00000000A', '2018-05-07', 6, '5');
+INSERT INTO `parte_horas2` (`DNI_EMPLEADO`, `FECHA`, `HORAS`, `SALARIO`) VALUES
+('00000000A', '2018-05-07', 6, '60.00');
 
 -- --------------------------------------------------------
 
@@ -168,9 +171,9 @@ INSERT INTO `reserva_sala2` (`IDESPECTACULO`, `VENDEDOR`, `FECHA_INICIO`, `FECHA
 -- Filtros para la tabla `entradas2`
 --
 ALTER TABLE `entradas2`
-  ADD CONSTRAINT `entradas2_ibfk_3` FOREIGN KEY (`VENDEDOR`) REFERENCES `empleados2` (`DNI_EMPLEADO`),
   ADD CONSTRAINT `entradas2_ibfk_1` FOREIGN KEY (`DNIENTRADA`) REFERENCES `clientes2` (`DNI_CLIENTE`),
-  ADD CONSTRAINT `entradas2_ibfk_2` FOREIGN KEY (`IDESPECTACULO`) REFERENCES `espectaculos2` (`IDESPECTACULO`);
+  ADD CONSTRAINT `entradas2_ibfk_2` FOREIGN KEY (`IDESPECTACULO`) REFERENCES `espectaculos2` (`IDESPECTACULO`),
+  ADD CONSTRAINT `entradas2_ibfk_3` FOREIGN KEY (`VENDEDOR`) REFERENCES `empleados2` (`DNI_EMPLEADO`);
 
 --
 -- Filtros para la tabla `parte_horas2`

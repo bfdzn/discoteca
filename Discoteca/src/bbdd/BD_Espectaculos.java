@@ -22,7 +22,7 @@ public class BD_Espectaculos extends BD_Conector {
 
 	public  int añadir_Espectaculo( Espectaculos espectaculo){	
 		String cadenaSQL="INSERT INTO ESPECTACULOS VALUES('" + espectaculo.getIdEspectaculo() + "','" +
-				espectaculo.getNombreEspectaculo() + "','" + espectaculo.getFechaInicio() + "','" + espectaculo.getFechaFin() + "','" + espectaculo.getAforo() + "')"; 
+				espectaculo.getNombreEspectaculo() + "','" + espectaculo.getFechaInicio() + "','" + espectaculo.getFechaFin() + "','" + espectaculo.getPrecioEntrada() + "','" + espectaculo.getAforo() + "')"; 
 		
 		try{
 			this.abrir();
@@ -99,7 +99,7 @@ public class BD_Espectaculos extends BD_Conector {
 				java.sql.Date f2=reg.getDate("FECHA_FIN");
 				LocalDate fecha2=f2.toLocalDate();
 				
-				espectaculoBuscar = new Espectaculos(reg.getInt("IDESPECTACULO"), reg.getString("NOMBRE"),fecha1,fecha2);	
+				espectaculoBuscar = new Espectaculos(reg.getInt("IDESPECTACULO"), reg.getString("NOMBRE"),fecha1,fecha2, reg.getDouble("PRECIO_ENTRADA"),reg.getInt("AFORO"));	
 				listaEspectaculos.add(espectaculoBuscar);
 			}
 			s.close();
@@ -130,7 +130,7 @@ public class BD_Espectaculos extends BD_Conector {
 				java.sql.Date f2=reg.getDate("FECHA_FIN");
 				LocalDate fecha2=f2.toLocalDate();
 				
-				espectaculoBuscar = new Espectaculos(reg.getInt("IDESPECTACULO"), reg.getString("NOMBRE"),fecha1,fecha2);	
+				espectaculoBuscar = new Espectaculos(reg.getInt("IDESPECTACULO"), reg.getString("NOMBRE"),fecha1,fecha2,reg.getDouble("PRECIO_ENTRADA"),(reg.getInt("AFORO")));	
 			}
 			s.close();
 			this.cerrar();

@@ -33,7 +33,7 @@ public class Principal {
 		switch (opcion) {
 		case 1:
 			System.out.println("1.Solicitar entradas");
-			System.out.println("2.Solicitar comprar entradas");
+			System.out.println("2.Solicitar reserva entradas");
 			break;
 		case 2:
 			Empleado usuario = null;
@@ -65,14 +65,14 @@ public class Principal {
 					opcion = sc.nextInt();
 					sc.nextLine();
 
-					switch (opcion) {
+					switch (opcion) {//Alta espectáculo/Listar espectáculos
 					case 1:
 						opcion = 0;
 						while (opcion != 4) {
 							System.out.println("1.Alta espectáculo");
 							System.out.println("2.Borrar espectáculo");
 							System.out.println("3.Listar espectáculos");
-							System.out.println("3.Salir");
+							System.out.println("4.Salir");
 							opcion = sc.nextInt();
 							sc.nextLine();
 							switch (opcion) {
@@ -96,6 +96,12 @@ public class Principal {
 									fechaFin = fechaformateada(fechaAnotada2);
 									
 								}
+								System.out.println("Introduzca precio espectáculo");
+								double precioEspectaculo = sc.nextDouble();
+								System.out.println("Introduzca aforo espectáculo");
+								int aforo = sc.nextInt();
+								
+								
 								int validarFecha = bdespectaculos.buscarFecha(fechaInicio, fechaFin);
 								switch(validarFecha) {
 									case 0:
@@ -103,7 +109,7 @@ public class Principal {
 										break;
 									case 1:
 										System.out.println("El espectáculo tiene hueco para ser añadido");
-										Espectaculos espectaculoAlta = new Espectaculos(idEspectaculo, nombreEspectaculo, fechaInicio, fechaFin);
+										Espectaculos espectaculoAlta = new Espectaculos(idEspectaculo, nombreEspectaculo, fechaInicio, fechaFin, precioEspectaculo,aforo);
 										filas = bdespectaculos.añadir_Espectaculo(espectaculoAlta);
 										if(filas == -1) {
 											System.out.println("Problemas técnicos");
@@ -132,13 +138,15 @@ public class Principal {
 
 								}
 								break;
+							case 4:
+								break;
 							}
 							
 						}
-					case 2:
+					case 2://Alta baja alquiler/sala
 
 						break;
-					case 3:
+					case 3: //Control del informe de horas
 						System.out.println("Introduzca el mes del cuál quiere sacar el parte de horas");
 						int mes = sc.nextInt();
 						sc.nextLine();
@@ -160,14 +168,14 @@ public class Principal {
 						}
 						
 						break;
-					case 4:
+					case 4://Revisar la facturación mensual
 						
 						
 						
 						
 						
 						break;
-					case 5:
+					case 5://Dar de alta a un empleado
 						System.out.println("Introduce dniEmpleado");
 						String dniEmpleado = sc.nextLine();
 						System.out.println("Introduce nombreEmpleado");
@@ -187,7 +195,7 @@ public class Principal {
 						if(filas == -1) {
 							System.out.println("Problemas técnicos");
 						}else {
-							System.out.println("Espectáculo añadido");
+							System.out.println("Empleado añadido");
 						}
 						break;
 					
@@ -216,7 +224,7 @@ public class Principal {
 
 				}
 
-			} else {
+			} else {//Pantalla de empleado
 				opcion = 0;
 
 				while (opcion != 3) {
@@ -226,7 +234,7 @@ public class Principal {
 					opcion = sc.nextInt();
 
 					switch (opcion) {
-					case 1:
+					case 1://Mandar un informe de horas
 						System.out.println("Introduce numero horas");
 						int horas = sc.nextInt();
 						filas = 0;
@@ -246,7 +254,7 @@ public class Principal {
 						}
 						break;
 
-					case 2:
+					case 2://Vender entradas
 						System.out.println("Vender entrada");
 						
 
