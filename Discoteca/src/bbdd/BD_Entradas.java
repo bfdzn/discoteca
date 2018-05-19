@@ -93,7 +93,7 @@ public class BD_Entradas extends BD_Conector {
 			s=c.createStatement();
 			reg=s.executeQuery(cadenaSQL);
 			if ( reg.next()) {
-				maxEntrada=reg.getInt(1);
+				maxEntrada=reg.getInt("NUMENTRADA");
 			}
 			s.close();
 			this.cerrar();
