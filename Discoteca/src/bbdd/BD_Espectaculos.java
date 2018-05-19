@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
+import excepciones.EspectaculoNoExiste;
 import modelos.Admin;
 import modelos.Espectaculos;
 
@@ -114,7 +115,7 @@ public class BD_Espectaculos extends BD_Conector {
 	}
 	
 	
-	public Espectaculos buscarEspectaculo (int espectaculo) {
+	public Espectaculos buscarEspectaculo (int espectaculo) throws EspectaculoNoExiste{
 		
 		String cadena="SELECT * FROM espectaculos2 WHERE idespectaculo = ' " +espectaculo + " ' ";
 		
@@ -134,7 +135,7 @@ public class BD_Espectaculos extends BD_Conector {
 			}
 			s.close();
 			this.cerrar();
-			return espectaculoBuscar;
+			throw new EspectaculoNoExiste("El espectáculo no existe en la BBDD");
 		}
 		catch ( SQLException e){
 	

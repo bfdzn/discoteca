@@ -3,8 +3,11 @@ package bbdd;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.Vector;
 
 import modelos.Entradas;
+import modelos.ParteHoras;
 
 public class BD_Entradas extends BD_Conector {
 	private static Statement s;	
@@ -54,9 +57,36 @@ public class BD_Entradas extends BD_Conector {
 			}
 	}
 	
-	public int numeroEntrada(Entradas entrada)
+	public  Vector<Entradas> Listar_entradas_mes(int mes, int ano){
+		String cadenaSQL="SELECT * from entradas2 WHERE DATE_FORMAT(FECHA,'%m%Y')='"+mes+ano+"'";
+		Vector<Entradas> listar_entradas=new Vector<Entradas>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			
+			while ( reg.next()){
+				java.sql.Date f1=reg.getDate("FECHA");
+				LocalDate fecha1=f1.toLocalDate();
+				listar_entradas.add(new Entradas(reg.getInt("NUMENTRADA"),
+						reg.getInt("IDESPECTACULO"),reg.getString("DNIENTRADA"),fecha1,reg.getString("VENDEDOR")));
+				}
+
+				
+			s.close();
+			this.cerrar();
+			return listar_entradas;
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
+	
+	
+	
+	public int numeroEntrada(int id)
 	{
-		String cadenaSQL="SELECT MAX(NUMENTRADA) FROM ENTRADAS WHERE idEspectaculo ='"+ entrada.getIdEspectaculo() + "'";
+		String cadenaSQL="SELECT MAX(NUMENTRADA) FROM ENTRADAS WHERE idEspectaculo ='"+ id + "'";
 		try{
 			int maxEntrada=0;
 			this.abrir();

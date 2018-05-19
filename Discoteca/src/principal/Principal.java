@@ -6,8 +6,10 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 
 import bbdd.*;
+import excepciones.EspectaculoNoExiste;
 import modelos.Admin;
 import modelos.Empleado;
+import modelos.Entradas;
 import modelos.Espectaculos;
 import modelos.ParteHoras;
 
@@ -18,8 +20,7 @@ public class Principal {
 		BD_Empleado bdempleado = new BD_Empleado("mysql-properties.xml");
 		BD_parte_horas bdhoras = new BD_parte_horas("mysql-properties.xml");
 		BD_Espectaculos bdespectaculos = new BD_Espectaculos("mysql-properties.xml");
-
-
+		BD_Entradas bdentradas = new BD_Entradas("mysql-properties.xml");
 		int filas = 0;
 
 		int opcion = 0;
@@ -31,7 +32,7 @@ public class Principal {
 		}
 
 		switch (opcion) {
-		case 1:
+		case 1://menu cliente
 			System.out.println("1.Solicitar entradas");
 			System.out.println("2.Solicitar reserva entradas");
 			break;
@@ -65,7 +66,7 @@ public class Principal {
 					opcion = sc.nextInt();
 					sc.nextLine();
 
-					switch (opcion) {//Alta espectáculo/Listar espectáculos
+					switch (opcion) {// Alta espectáculo/Listar espectáculos
 					case 1:
 						opcion = 0;
 						while (opcion != 4) {
@@ -87,53 +88,52 @@ public class Principal {
 									System.out.println("Introduce fecha inicio en el siguiente formato dd/LL/yyyy");
 									String fechaAnotada = sc.nextLine();
 									fechaInicio = fechaformateada(fechaAnotada);
-									
+
 								}
 								LocalDate fechaFin = null;
 								while (fechaFin == null) {
 									System.out.println("Introduce fecha fin en el siguiente formato dd/LL/yyyy");
 									String fechaAnotada2 = sc.nextLine();
 									fechaFin = fechaformateada(fechaAnotada2);
-									
+
 								}
 								System.out.println("Introduzca precio espectáculo");
 								double precioEspectaculo = sc.nextDouble();
 								System.out.println("Introduzca aforo espectáculo");
 								int aforo = sc.nextInt();
-								
-								
+
 								int validarFecha = bdespectaculos.buscarFecha(fechaInicio, fechaFin);
-								switch(validarFecha) {
-									case 0:
-										System.out.println("El espectáculo se solapa con otro");
-										break;
-									case 1:
-										System.out.println("El espectáculo tiene hueco para ser añadido");
-										Espectaculos espectaculoAlta = new Espectaculos(idEspectaculo, nombreEspectaculo, fechaInicio, fechaFin, precioEspectaculo,aforo);
-										filas = bdespectaculos.añadir_Espectaculo(espectaculoAlta);
-										if(filas == -1) {
-											System.out.println("Problemas técnicos");
-										}else {
-											System.out.println("Espectáculo añadido");
-										}
-										break;
-									case 2:
+								switch (validarFecha) {
+								case 0:
+									System.out.println("El espectáculo se solapa con otro");
+									break;
+								case 1:
+									System.out.println("El espectáculo tiene hueco para ser añadido");
+									Espectaculos espectaculoAlta = new Espectaculos(idEspectaculo, nombreEspectaculo,
+											fechaInicio, fechaFin, precioEspectaculo, aforo);
+									filas = bdespectaculos.añadir_Espectaculo(espectaculoAlta);
+									if (filas == -1) {
 										System.out.println("Problemas técnicos");
-										break;
+									} else {
+										System.out.println("Espectáculo añadido");
+									}
+									break;
+								case 2:
+									System.out.println("Problemas técnicos");
+									break;
 								}
 							case 2:
-								System.out.println("Introduzca la id del espectáculo a borrar");
-								int idBorrar = sc.nextInt();
-								Espectaculos espectaculoBorrar = bdespectaculos.buscarEspectaculo(idBorrar);
-								if(espectaculoBorrar == null) {
-									System.out.println("El espectaculo no se ha encontrado en el sistema");
-								}else {
-									bdespectaculos.borrar_Espectaculo(espectaculoBorrar);
-								}
+								/*
+								 * System.out.println("Introduzca la id del espectáculo a borrar"); int idBorrar
+								 * = sc.nextInt(); Espectaculos espectaculoBorrar =
+								 * bdespectaculos.buscarEspectaculo(idBorrar); if(espectaculoBorrar == null) {
+								 * System.out.println("El espectaculo no se ha encontrado en el sistema"); }else
+								 * { bdespectaculos.borrar_Espectaculo(espectaculoBorrar); }
+								 */
 								break;
 							case 3:
-								Vector <Espectaculos> listarEspectaculos = bdespectaculos.listarEspectaculos();
-								for(int i=0;i<listarEspectaculos.size();i++) {
+								Vector<Espectaculos> listarEspectaculos = bdespectaculos.listarEspectaculos();
+								for (int i = 0; i < listarEspectaculos.size(); i++) {
 									System.out.println(listarEspectaculos.get(i).toString());
 
 								}
@@ -141,41 +141,37 @@ public class Principal {
 							case 4:
 								break;
 							}
-							
+
 						}
-					case 2://Alta baja alquiler/sala
+					case 2:// Alta baja alquiler/sala
 
 						break;
-					case 3: //Control del informe de horas
+					case 3: // Control del informe de horas
 						System.out.println("Introduzca el mes del cuál quiere sacar el parte de horas");
 						int mes = sc.nextInt();
 						sc.nextLine();
 						System.out.println("Introduzca el dni del empleado del cuál quiere listar las horas");
 						String dniListar = sc.nextLine();
-						Vector <ParteHoras> parteMes = bdhoras.Listar_parte_horas_mes_dni(mes,dniListar);
-						if(parteMes == null) {
+						Vector<ParteHoras> parteMes = bdhoras.Listar_parte_horas_mes_dni(mes, dniListar);
+						if (parteMes == null) {
 							System.out.println("Fallo del sistema");
-						}else {
-							double salario=0;
-							int horas=0;
-							for(int i=0;i<parteMes.size();i++) {
-								salario=+parteMes.get(i).getSalario();
-								horas=+parteMes.get(i).getHoras();
+						} else {
+							double salario = 0;
+							int horas = 0;
+							for (int i = 0; i < parteMes.size(); i++) {
+								salario = +parteMes.get(i).getSalario();
+								horas = +parteMes.get(i).getHoras();
 							}
-							System.out.println("Al empleado con dni: "+dniListar+"le corresponden: ");
-							System.out.println(salario+" euros por");
-							System.out.println(horas+" horas.");
+							System.out.println("Al empleado con dni: " + dniListar + "le corresponden: ");
+							System.out.println(salario + " euros por");
+							System.out.println(horas + " horas.");
 						}
-						
+
 						break;
-					case 4://Revisar la facturación mensual
-						
-						
-						
-						
-						
+					case 4:// Revisar la facturación mensual
+						System.out.println("Introduce el mes y año separado por un espacio, para revisar la facturación de un mes");
 						break;
-					case 5://Dar de alta a un empleado
+					case 5:// Dar de alta a un empleado
 						System.out.println("Introduce dniEmpleado");
 						String dniEmpleado = sc.nextLine();
 						System.out.println("Introduce nombreEmpleado");
@@ -189,34 +185,26 @@ public class Principal {
 						String contraseña = sc.nextLine();
 						System.out.println("Introduce precio hora");
 						double precioHora = sc.nextDouble();
-						Empleado alta = new Empleado(dniEmpleado, nombreEmpleado, apellidoEmpleado, oficio, fechaAlta, contraseña, precioHora);
+						Empleado alta = new Empleado(dniEmpleado, nombreEmpleado, apellidoEmpleado, oficio, fechaAlta,
+								contraseña, precioHora);
 						filas = 0;
 						filas = bdempleado.añadir_Empleado(alta);
-						if(filas == -1) {
+						if (filas == -1) {
 							System.out.println("Problemas técnicos");
-						}else {
+						} else {
 							System.out.println("Empleado añadido");
 						}
 						break;
-					
-						
-						/*System.out.println("Introduce dni empleado");
-						String dniBorrar = sc.nextLine();
-						filas = 0;
-						filas = bdempleado.borrarEmpleado(dniBorrar);
-						switch (filas) {
-						case 1:
-							System.out.println("Empleado borrado");
-							break;
-						case 0:
-							System.out.println("Empleado no borrado");
-							break;
-						case -1:
-							System.out.println("Problemas técnicos");
-							break;
 
-						}
-						break;*/
+					/*
+					 * System.out.println("Introduce dni empleado"); String dniBorrar =
+					 * sc.nextLine(); filas = 0; filas = bdempleado.borrarEmpleado(dniBorrar);
+					 * switch (filas) { case 1: System.out.println("Empleado borrado"); break; case
+					 * 0: System.out.println("Empleado no borrado"); break; case -1:
+					 * System.out.println("Problemas técnicos"); break;
+					 * 
+					 * } break;
+					 */
 					case 6:
 						System.out.println("Saliendo programa");
 						break;
@@ -224,7 +212,7 @@ public class Principal {
 
 				}
 
-			} else {//Pantalla de empleado
+			} else {// Pantalla de empleado
 				opcion = 0;
 
 				while (opcion != 3) {
@@ -234,7 +222,7 @@ public class Principal {
 					opcion = sc.nextInt();
 
 					switch (opcion) {
-					case 1://Mandar un informe de horas
+					case 1:// Mandar un informe de horas
 						System.out.println("Introduce numero horas");
 						int horas = sc.nextInt();
 						filas = 0;
@@ -254,9 +242,41 @@ public class Principal {
 						}
 						break;
 
-					case 2://Vender entradas
+					case 2:// Vender entradas
 						System.out.println("Vender entrada");
-						
+						System.out.println("Introduce el número espectáculo");
+						int idEntradaEspect = sc.nextInt();
+						sc.nextLine();
+						try {
+							Espectaculos especEntrada = bdespectaculos.buscarEspectaculo(idEntradaEspect);
+							if (especEntrada == null) {
+								System.out.println("Problemas técnicos");
+								break;
+							} else {
+								int numEntrada = bdentradas.numeroEntrada(idEntradaEspect);
+								if (especEntrada.getAforo() == numEntrada) {
+									System.out.println("El espectáculo tiene el aforo completo");
+									break;
+								} else {
+									System.out.println("Introduce el dni del comprador");
+									String dniEntrada = sc.nextLine();
+									Entradas altaEntrada = new Entradas(numEntrada, idEntradaEspect, dniEntrada,
+											LocalDate.now(), usuario.getDni());
+									filas = 0;
+									filas = bdentradas.añadir_Entrada(altaEntrada);
+									if (filas == -1) {
+										System.out.println("Problemas técnicos");
+									} else {
+										System.out.println("Empleado añadido");
+									}
+
+								}
+							}
+
+						} catch (EspectaculoNoExiste e) {
+							System.out.println("El espectáculo del que quiere comprar entradas no existe en la BBDD");
+							break;
+						}
 
 					}
 
