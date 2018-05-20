@@ -57,7 +57,7 @@ public class BD_Entradas extends BD_Conector {
 			}
 	}
 	
-	public  Vector<Entradas> Listar_entradas_mes(int mes, int ano){
+	public  Vector<Entradas> Listar_entradas_mes(int mes, int ano){//esto sería más fácil que nos devolviera una select con el valor
 		String cadenaSQL="SELECT * from entradas2 WHERE DATE_FORMAT(FECHA,'%m%Y')='"+mes+ano+"'";
 		Vector<Entradas> listar_entradas=new Vector<Entradas>();
 		try{

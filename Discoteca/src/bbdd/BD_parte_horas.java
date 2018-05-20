@@ -72,7 +72,7 @@ public class BD_parte_horas extends BD_Conector{
 		}
 	}
 
-	public  Vector<ParteHoras> Listar_parte_horas_mes_dni(int mes, String dni){
+	public  Vector<ParteHoras> Listar_parte_horas_mes_dni(int mes, int ano, String dni){
 		String cadenaSQL="SELECT * from parte_horas2 WHERE DNI_EMPLEADO='"+dni+"'";
 		Vector<ParteHoras> lista_parte_horas=new Vector<ParteHoras>();
 		try{
@@ -83,7 +83,7 @@ public class BD_parte_horas extends BD_Conector{
 			while ( reg.next()){
 				java.sql.Date f1=reg.getDate("FECHA");
 				LocalDate fecha1=f1.toLocalDate();
-				if(fecha1.getMonthValue() == mes) {
+				if(fecha1.getMonthValue() == mes && fecha1.getYear() == ano) {
 				lista_parte_horas.add(new ParteHoras(reg.getString("DNI_EMPLEADO"),
 						fecha1,reg.getInt("HORAS"),reg.getDouble("IMPORTE")));
 				}

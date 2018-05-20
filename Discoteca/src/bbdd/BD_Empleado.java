@@ -19,7 +19,7 @@ public class BD_Empleado extends BD_Conector {
 	}
 	
 	public  int añadir_Empleado( Empleado al){	
-		String cadenaSQL="INSERT INTO alumnos VALUES('" + al.getDni() + "','" +
+		String cadenaSQL="INSERT INTO empleados2 VALUES('" + al.getDni() + "','" +
 		al.getDni()+"','"+ al.getNombre() +"','"+ al.getApellido()+"','"+
 				al.getOficio()+"','"+al.getFechaAlta()+"','"+al.getContraseña()+"','"+al.getPrecioHora()+"')"; 	
 		
@@ -31,7 +31,8 @@ public class BD_Empleado extends BD_Conector {
 		this.cerrar();
 		return filas;
 		}
-		catch ( SQLException e){			
+		catch ( SQLException e){	
+			System.out.println(e);
 			return -1;
 		}
 	}
@@ -42,6 +43,8 @@ public class BD_Empleado extends BD_Conector {
 
 	public Empleado buscarEmpleado(String dni, String contraseña) {
 		String cadenaSQL = "SELECT * from empleados2 WHERE DNI_EMPLEADO='" + dni + "'";
+		System.out.println("Hola");
+		System.out.println(cadenaSQL);
 		Empleado retorno = null;
 		try {
 			this.abrir();
@@ -65,14 +68,16 @@ public class BD_Empleado extends BD_Conector {
 
 					retorno = new Empleado(reg.getString("DNI_EMPLEADO"), reg.getString("NOMBRE"),
 							reg.getString("APELLIDO"), reg.getString("OFICIO"), fBuena, reg.getString("CONTRASEÑA"),
-							reg.getDouble("PrecioHora"));
+							reg.getDouble("Precio_Hora"));
 					return retorno;
 				}
 			}
+			System.out.println("Hola");
 			s.close();
 			this.cerrar();
 			return null;
 		} catch (SQLException e) {
+			System.err.println(e);
 			return null;
 		}
 	}

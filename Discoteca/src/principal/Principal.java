@@ -139,6 +139,7 @@ public class Principal {
 								}
 								break;
 							case 4:
+								System.out.println("Saliendo pantalla espectáculo");
 								break;
 							}
 
@@ -147,12 +148,17 @@ public class Principal {
 
 						break;
 					case 3: // Control del informe de horas
-						System.out.println("Introduzca el mes del cuál quiere sacar el parte de horas");
+						System.out.println("Introduzca el mes y el año del cuál quiere sacar el parte de horas");
+						System.out.println("Año");
+						int ano = sc.nextInt();
+						System.out.println("Mes");
 						int mes = sc.nextInt();
+						sc.nextLine();
+						
 						sc.nextLine();
 						System.out.println("Introduzca el dni del empleado del cuál quiere listar las horas");
 						String dniListar = sc.nextLine();
-						Vector<ParteHoras> parteMes = bdhoras.Listar_parte_horas_mes_dni(mes, dniListar);
+						Vector<ParteHoras> parteMes = bdhoras.Listar_parte_horas_mes_dni(mes, ano, dniListar);
 						if (parteMes == null) {
 							System.out.println("Fallo del sistema");
 						} else {
@@ -169,8 +175,36 @@ public class Principal {
 
 						break;
 					case 4:// Revisar la facturación mensual
-						System.out.println("Introduce el mes y año separado por un espacio, para revisar la facturación de un mes");
+						System.out.println("Introduce el mes");
+						int mesf = sc.nextInt();
+						System.out.println("Introduce el año");
+						int anof = sc.nextInt();
+						Vector<Entradas> entradas = bdentradas.Listar_entradas_mes(mesf, anof);
+						if (entradas == null) {
+							System.out.println("Fallo del sistema");
+						} else {
+							double recaudacion = 0;
+							for (int i = 0; i < entradas.size(); i++) {
+								try {
+									double precioH = bdespectaculos.buscarPrecio(entradas.get(i).getIdEspectaculo());
+									 recaudacion = recaudacion+precioH;
+									 
+								} catch (EspectaculoNoExiste e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							System.out.println("El mes "+mesf+" del año "+anof);
+							System.out.println("Se recaudaron en total :"+recaudacion);
+						}
+						
+						
+						
+						
 						break;
+						
+						
+						
 					case 5:// Dar de alta a un empleado
 						System.out.println("Introduce dniEmpleado");
 						String dniEmpleado = sc.nextLine();

@@ -114,6 +114,30 @@ public class BD_Espectaculos extends BD_Conector {
 		}
 	}
 	
+public double buscarPrecio (int espectaculo) throws EspectaculoNoExiste{
+		
+		String cadena="SELECT * FROM espectaculos2 WHERE idespectaculo = ' " +espectaculo + " ' ";
+		
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadena);
+			if ( reg.next()) {	
+				double precio = reg.getDouble("PRECIO_ENTRADA");
+				return precio;
+				
+			}
+			s.close();
+			this.cerrar();
+			throw new EspectaculoNoExiste("El espectáculo no existe en la BBDD");
+		}
+		catch ( SQLException e){
+	
+			return -1;
+			
+		}
+	}
+	
 	
 	public Espectaculos buscarEspectaculo (int espectaculo) throws EspectaculoNoExiste{
 		

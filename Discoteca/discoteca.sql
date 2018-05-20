@@ -56,6 +56,8 @@ CREATE TABLE IF NOT EXISTS `empleados2` (
   `OFICIO` varchar(12) NOT NULL,
   `FECHA_ALTA` date NOT NULL,
   `CONTRASEÑA` varchar(12) NOT NULL,
+  `FECHA_HORA` decimal(10,2) NOT NULL,
+  `PRECIO_HORA` decimal(10,2) NOT NULL;
   PRIMARY KEY (`DNI_EMPLEADO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -64,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `empleados2` (
 --
 
 INSERT INTO `empleados2` (`DNI_EMPLEADO`, `NOMBRE`, `APELLIDO`, `OFICIO`, `FECHA_ALTA`, `CONTRASEÑA`) VALUES
-('00000000A', 'Pepe', 'Garcia', 'VENDEDOR', '2000-05-01', 'a1a1a1a1');
+('00000000A', 'Pepe', 'Garcia', 'VENDEDOR', '2000-05-01', 'a1a1a1a1','5');
 
 -- --------------------------------------------------------
 
