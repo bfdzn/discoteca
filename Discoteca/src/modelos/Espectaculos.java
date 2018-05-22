@@ -15,7 +15,7 @@ public class Espectaculos {
 	
 	
 
-	/**
+	/** Constructor para Espectaculos
 	 * @param idEspectaculo
 	 * @param nombreEspectaculo
 	 * @param fechaInicio
