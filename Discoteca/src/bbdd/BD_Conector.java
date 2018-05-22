@@ -15,7 +15,7 @@ import java.util.Properties;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class BD_Conector.
+ * The Class BD_Conector. es la clase principal que conecta el programa con la bdd
  */
 public class BD_Conector{
 	
@@ -73,7 +73,7 @@ public class BD_Conector{
 	}
 	
 	/**
-	 * Abrir.
+	 * Abrir. Método que abre la conexión
 	 */
 	public void abrir(){
 		try{
@@ -93,7 +93,7 @@ public class BD_Conector{
 	
 
 	/**
-	 * Cerrar.
+	 * Cerrar. Método que cierra la conexión
 	 */
 	public void cerrar(){
 		try{

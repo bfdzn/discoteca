@@ -11,7 +11,7 @@ import java.time.*;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class BD_Empleado.
+ * La clase que contiene los métodos que conectan con la base de datos empleado
  */
 public class BD_Empleado extends BD_Conector {
 
@@ -22,7 +22,7 @@ public class BD_Empleado extends BD_Conector {
 	private static ResultSet reg;
 
 	/**
-	 * Instantiates a new b D empleado.
+	 * Constructor empleado
 	 *
 	 * @param file the file
 	 */
@@ -33,8 +33,8 @@ public class BD_Empleado extends BD_Conector {
 	/**
 	 * Añadir empleado.
 	 *
-	 * @param al the al
-	 * @return the int
+	 * @param al es un objeto de la clase Empleado que se busca en la base de datos
+	 * @return un int que será 1 en caso de que exista en la bbdd o -1 en caso de fallo
 	 */
 	public  int añadir_Empleado( Empleado al){	
 		String cadenaSQL="INSERT INTO empleados2 VALUES('" + al.getDni() + "','"+ al.getNombre() +"','"+ al.getApellido()+"','"+
@@ -59,11 +59,11 @@ public class BD_Empleado extends BD_Conector {
 	
 
 	/**
-	 * Buscar empleado.
+	 * Buscar empleado un método que busca un Empleado en la bbdd y coteja su dni con la contraseña almacenada
 	 *
-	 * @param dni the dni
-	 * @param contraseña the contraseña
-	 * @return the empleado
+	 * @param dni de empleado
+	 * @param contraseña la contraseña de empleado
+	 * @return el empleado o null sino existe o su contraseña es invalida
 	 */
 	public Empleado buscarEmpleado(String dni, String contraseña) {
 		String cadenaSQL = "SELECT * from empleados2 WHERE DNI_EMPLEADO='" + dni + "'";
@@ -108,7 +108,7 @@ public class BD_Empleado extends BD_Conector {
 
 	/**
 	 * Borrar empleado.
-	 *
+	 * @deprecated es una metodo que no se está utilizando, para versiones futuras
 	 * @param dni the dni
 	 * @return the int
 	 */

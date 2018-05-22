@@ -5,6 +5,7 @@ import java.time.LocalDate;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Clientes.
+ * La clase modelo del objeto clientes
  */
 public class Clientes {
 	

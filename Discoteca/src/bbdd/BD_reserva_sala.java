@@ -12,6 +12,7 @@ import modelos.Reserva_sala;;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BD_reserva_sala.
+ * Es la clase que conecta la reserva_sala a la bbdd
  */
 public class BD_reserva_sala extends BD_Conector {
 
@@ -34,7 +35,7 @@ public class BD_reserva_sala extends BD_Conector {
 	/**
 	 * Listar reserva.
 	 *
-	 * @return the vector
+	 * @return todas las reservas en un vector
 	 */
 	public Vector<Reserva_sala> Listar_reserva() {
 		String cadenaSQL = "SELECT * from reserva_sala2 ";
@@ -65,8 +66,8 @@ public class BD_reserva_sala extends BD_Conector {
 
 	/**
 	 * Ultima reserva.
-	 *
-	 * @return the local date
+	 * devuelve la fecha de la última reserva
+	 * @return LocalDate de la última reserva
 	 */
 	public LocalDate Ultima_reserva() {
 		Vector<Reserva_sala> auxiliar = Listar_reserva();
@@ -80,9 +81,9 @@ public class BD_reserva_sala extends BD_Conector {
 
 	/**
 	 * Añadir reserva.
-	 *
-	 * @param c1 the c 1
-	 * @return the int
+	 * añade la reserva
+	 * @param c1 es un objeto reserva_sala
+	 * @return the int dependiendo del comportamiento de la bbdd
 	 */
 	public int añadir_reserva(Reserva_sala c1) {
 		String cadenaSQL = null;
@@ -115,7 +116,7 @@ public class BD_reserva_sala extends BD_Conector {
 	/**
 	 * Esta libre.
 	 *
-	 * @return true, if successful
+	 * @return true, si la sala está libre
 	 */
 	public boolean esta_libre() {
 		LocalDate fechaActual = LocalDate.now();

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Espectaculos.
+ * La clase de los espectáculos
  */
 public class Espectaculos {
 	

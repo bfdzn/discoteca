@@ -9,6 +9,7 @@ import bbdd.BD_reserva_sala;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Reserva_sala.
+ * Clase de la reserva_sala
  */
 public class Reserva_sala {
 

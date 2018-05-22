@@ -6,6 +6,7 @@ import java.time.LocalDate;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Admin.
+ * Clase que cuelga de usuario, tiene privilegios especiales
  */
 public class Admin extends Empleado {
 

@@ -7,6 +7,7 @@ import java.time.LocalDate;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ParteHoras.
+ * La clase del objeto parte de horas
  */
 public class ParteHoras {
 	

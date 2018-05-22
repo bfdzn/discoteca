@@ -6,6 +6,7 @@ import java.time.LocalDate;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Entradas.
+ * La clase de entradas
  */
 public class Entradas {
 	

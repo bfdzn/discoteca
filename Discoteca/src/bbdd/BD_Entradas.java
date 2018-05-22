@@ -12,6 +12,7 @@ import modelos.ParteHoras;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BD_Entradas.
+ * La clase que conecta las entradas con la bdd
  */
 public class BD_Entradas extends BD_Conector {
 
@@ -34,10 +35,9 @@ public class BD_Entradas extends BD_Conector {
 
 	/**
 	 * Añadir entrada.
-	 *
-	 * @param entrada
-	 *            the entrada
-	 * @return the int
+	 * Metodo que añade entrada accediendo al método por la ventana de usuario el vendedor será declarado a null
+	 * @param entrada que es un Objeto entrada a añadir en la bbdd
+	 * @return the int 1 si  se añade, 0 sino se añade nada y -1 sino;
 	 */
 	public int añadir_Entrada(Entradas entrada) {
 		String cadenaSQL = null;
@@ -65,7 +65,7 @@ public class BD_Entradas extends BD_Conector {
 
 	/**
 	 * Borrar entrada.
-	 *
+	 * @deprecated no se está utilizando para mantener la integridad de la bbdd
 	 * @param entrada
 	 *            the entrada
 	 * @return the int
@@ -90,12 +90,12 @@ public class BD_Entradas extends BD_Conector {
 
 	/**
 	 * Listar entradas mes.
-	 *
-	 * @param mesAno the mes ano
-	 * @return the vector
+	 * se le pasa un mes
+	 * @param mesAno es la suma de mes y ano que vamos a consultar
+	 * @return vector con las entradas que cumplan la condicion
 	 */
-	public Vector<Entradas> Listar_entradas_mes(String mesAno) {// esto sería más fácil que nos devolviera una select
-																	// con el valor
+	public Vector<Entradas> Listar_entradas_mes(String mesAno) {
+		
 		String cadenaSQL = "SELECT * from entradas2 WHERE DATE_FORMAT(FECHA,'%m%Y')='" + mesAno + "'";
 		System.out.println(cadenaSQL);
 		Vector<Entradas> listar_entradas = new Vector<Entradas>();
@@ -121,10 +121,10 @@ public class BD_Entradas extends BD_Conector {
 
 	/**
 	 * Numero entrada.
-	 *
-	 * @param id            the id
-	 * @param fecha the fecha
-	 * @return the int
+	 * 
+	 * @param id de espectáculo
+	 * @param fecha de compra
+	 * @return devuelve la máxima entrada del espectaculo en la fecha que se quiere utilizar
 	 */
 	public int numeroEntrada(int id, LocalDate fecha) {
 		String cadenaSQL = "SELECT MAX(NUMENTRADA) ENT FROM ENTRADAS2 WHERE idEspectaculo ='" + id + "' AND FECHA = '"+fecha+"'";

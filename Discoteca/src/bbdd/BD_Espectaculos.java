@@ -12,6 +12,7 @@ import modelos.Espectaculos;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BD_Espectaculos.
+ * La clase que conecta la bbdd a los espectáculos
  */
 public class BD_Espectaculos extends BD_Conector {
 
@@ -34,10 +35,10 @@ public class BD_Espectaculos extends BD_Conector {
 
 	/**
 	 * Añadir espectaculo.
-	 *
-	 * @param espectaculo
-	 *            the espectaculo
-	 * @return the int
+	 * metodo que añade espectaculos en la bbdd
+	 * @param espectaculo se trata del espectáculo que vamos a añadir a la bbdd
+	 *            
+	 * @return devuelve un int que es -1 en caso de que la bbdd tenga un error o 1 si añade el empleado
 	 */
 	public int añadir_Espectaculo(Espectaculos espectaculo) {
 		String cadenaSQL = "INSERT INTO ESPECTACULOS2 VALUES('" + espectaculo.getIdEspectaculo() + "','"
@@ -61,9 +62,10 @@ public class BD_Espectaculos extends BD_Conector {
 	/**
 	 * Borrar espectaculo.
 	 *
-	 * @param espectaculo
-	 *            the espectaculo
-	 * @return the int
+	 *@deprecated se trata de un metodo que no estamos utilizando para no violar la integridad de la tabla
+	 * @param espectaculo se le pasa un espectáculo
+	 * 
+	 * @return devuelve un int que nos dirá se si ha borrado o no de la bbdd
 	 */
 	public int borrar_Espectaculo(Espectaculos espectaculo) {
 
@@ -85,12 +87,11 @@ public class BD_Espectaculos extends BD_Conector {
 
 	/**
 	 * Buscar fecha.
+	 * Se trata de un metodo cuya función es buscar que los espectáculos no se solapen en el tiempo.
 	 *
-	 * @param fechaInicio
-	 *            the fecha inicio
-	 * @param fechaFin
-	 *            the fecha fin
-	 * @return the int
+	 * @param fechaInicio del espectaculo
+	 * @param fechaFin del espectáculo
+	 * @return si retorna 0 hay espectáculos que se solapan, si retorna 1 hay hueco, si retorna 2 hay un error en la bbdd
 	 */
 	public int buscarFecha(LocalDate fechaInicio, LocalDate fechaFin) {
 		String cadenaSQL = "SELECT FECHA_INICIO, FECHA_FIN from espectaculos2";
@@ -121,8 +122,9 @@ public class BD_Espectaculos extends BD_Conector {
 
 	/**
 	 * Listar espectaculos.
+	 * Se trata de un metodo que lista todos los espectaculos
 	 *
-	 * @return the vector
+	 * @return retorna un vector con todos los espectáculos
 	 */
 	public Vector<Espectaculos> listarEspectaculos() {
 
@@ -158,11 +160,10 @@ public class BD_Espectaculos extends BD_Conector {
 	/**
 	 * Buscar precio.
 	 *
-	 * @param espectaculo
-	 *            the espectaculo
-	 * @return the double
-	 * @throws EspectaculoNoExiste
-	 *             the espectaculo no existe
+	 * @param espectaculo es el idEspectaculo 
+	 * @return the double precio del espectaculo
+	 * @throws EspectaculoNoExiste si el espectaculo no existe
+	 *             
 	 */
 	public double buscarPrecio(int espectaculo) throws EspectaculoNoExiste {
 
@@ -189,8 +190,8 @@ public class BD_Espectaculos extends BD_Conector {
 
 	/**
 	 * Buscar max.
-	 *
-	 * @return the int
+	 * metodo que busca el máximo valor de idespectaculos de la bbdd
+	 * @return un int que será utilizado como primary key
 	 */
 	public int buscarMax(){
 
@@ -218,10 +219,9 @@ public class BD_Espectaculos extends BD_Conector {
 	/**
 	 * Buscar espectaculo.
 	 *
-	 * @param espectaculo
-	 *            the espectaculo
-	 * @return the espectaculos
-	 * @throws EspectaculoNoExiste
+	 * @param el id de espectaculo
+	 * @return el objeto espectaculo con esa idespectaculo
+	 * @throws EspectaculoNoExiste si el espectaculo no existe
 	 *             the espectaculo no existe
 	 */
 	public Espectaculos buscarEspectaculo(int espectaculo) throws EspectaculoNoExiste {
@@ -256,12 +256,10 @@ public class BD_Espectaculos extends BD_Conector {
 	/**
 	 * Modificar fecha espectaculo.
 	 *
-	 * @param espectaculo
-	 *            the espectaculo
+	 * @deprecated no se está utilizando
+	 * @param  espectaculo
 	 * @param fechaInicio
-	 *            the fecha inicio
 	 * @param fechaFin
-	 *            the fecha fin
 	 * @return the int
 	 */
 	public int modificar_FechaEspectaculo(Espectaculos espectaculo, LocalDate fechaInicio, LocalDate fechaFin) {

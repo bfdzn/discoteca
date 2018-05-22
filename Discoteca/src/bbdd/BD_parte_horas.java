@@ -16,6 +16,7 @@ import modelos.Reserva_sala;;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BD_parte_horas.
+ * conecta la clase parte_horas con la base de datos
  */
 public class BD_parte_horas extends BD_Conector{
 	
@@ -41,12 +42,12 @@ public class BD_parte_horas extends BD_Conector{
 	
 	/**
 	 * Añadir parte horas.
-	 *
-	 * @param dni the dni
-	 * @param fecha the fecha
-	 * @param horas the horas
-	 * @param precioHoras the precio horas
-	 * @return the int
+	 * añade un parte de horas en la base
+	 * @param dni del empleado
+	 * @param fecha en la que se realiza el parte de horas
+	 * @param horas número de horas que ha trabajado
+	 * @param precioHoras el precio hora que recibe
+	 * @return the int devuelve un valor dependiendo de lo que añada en la bbdd
 	 */
 	public int añadir_parte_horas (String dni,LocalDate fecha,int horas,Double precioHoras) {
 		double importe = horas*precioHoras;
@@ -70,9 +71,9 @@ public class BD_parte_horas extends BD_Conector{
 	
 	/**
 	 * Listar parte horas dni.
-	 *
-	 * @param dni the dni
-	 * @return the vector
+	 * devuelve un vector con los partes de horas de un empleado
+	 * @param dni del empleado
+	 * @return vector de ParteHoras
 	 */
 	public  Vector<ParteHoras> Listar_parte_horas_dni(String dni){
 		String cadenaSQL="SELECT * from parte_horas2 ";
@@ -103,10 +104,10 @@ public class BD_parte_horas extends BD_Conector{
 
 	/**
 	 * Listar parte horas mes dni.
-	 *
-	 * @param anoMes the ano mes
-	 * @param dni the dni
-	 * @return the vector
+	 * 
+	 * @param anoMes año y mes a listar
+	 * @param dni del empleado
+	 * @return array en el que la posición 0 corresponde con el importe total a cobrar y la dos las horas totales trabajadas
 	 */
 	public  double[] Listar_parte_horas_mes_dni(String anoMes, String dni){
 		String cadenaSQL="SELECT sum(salario) importe, sum(horas) horaT FROM `parte_horas2` where DATE_FORMAT(FECHA,'%m%Y') = '"+anoMes+"' and DNI_EMPLEADO = '"+dni+"'";
@@ -135,9 +136,9 @@ public class BD_parte_horas extends BD_Conector{
 	
 	/**
 	 * Listar parte horas fecha.
-	 *
-	 * @param fecha the fecha
-	 * @return the vector
+	 *devuelve un parte de horas asociado a una fecha
+	 * @param fecha la fecha utilizada
+	 * @return vector con parte de horas 
 	 */
 	public  Vector<ParteHoras> Listar_parte_horas_fecha(Date fecha){
 		String cadenaSQL="SELECT * from parte_horas2 ";

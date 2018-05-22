@@ -7,6 +7,7 @@ import java.util.Vector;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Empleado.
+ * Clase del objeto Empleado, Admin cuelga de ella
  */
 public class Empleado {
 	
