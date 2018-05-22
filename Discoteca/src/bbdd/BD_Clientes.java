@@ -17,6 +17,11 @@ public class BD_Clientes extends BD_Conector{
 		super(fileName);
 		// TODO Auto-generated constructor stub
 	}
+	/**
+	 * Añade un cliente a la bbdd
+	 * @param cliente
+	 * @return
+	 */
 	public  int añadir_Cliente( Clientes cliente){	
 		String cadenaSQL="INSERT INTO CLIENTES2 VALUES('" + cliente.getDni() + "','" +
 		cliente.getFechaNacimiento()+"')"; 	
@@ -33,6 +38,11 @@ public class BD_Clientes extends BD_Conector{
 			return -1;
 		}
 	}
+	/**
+	 * Busca un cliente dado su dni
+	 * @param dni
+	 * @return
+	 */
 	public Clientes buscarCliente(String dni){
 		String cadenaSQL="SELECT * from clientes2 WHERE DNI_CLIENTE='"+dni+"'";
 		Clientes retorno = null;
@@ -56,6 +66,10 @@ public class BD_Clientes extends BD_Conector{
 			return null;			
 		}
 	}
+	/**
+	 * Retorna un listado con todos los clientes
+	 * @return
+	 */
 	public  Vector<Clientes> listadoClientes(){
 		String cadenaSQL="SELECT * from CLIENTES2";
 		Vector<Clientes> listaClientes=new Vector<Clientes>();
