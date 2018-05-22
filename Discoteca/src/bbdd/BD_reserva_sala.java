@@ -54,8 +54,7 @@ public class BD_reserva_sala extends BD_Conector{
 				LocalDate fecha1=f1.toLocalDate();
 				java.sql.Date f2=reg.getDate("FECHA_FIN");
 				LocalDate fecha2=f2.toLocalDate();
-				lista_reservas.add(new Reserva_sala(reg.getString("VENDEDOR"),
-						fecha1,fecha2,reg.getString("DNI_CLIENTE"),reg.getInt("IDESPECTACULO"),reg.getInt("PRECIO")));
+				lista_reservas.add(new Reserva_sala(fecha1,fecha2,reg.getString("DNI_VENDEDOR"),reg.getString("DNI_CLIENTE")));
 
 				
 			}
@@ -121,7 +120,7 @@ public class BD_reserva_sala extends BD_Conector{
 	 */
 	public boolean esta_libre () {
 		LocalDate fechaActual = LocalDate.now();
-		BD_reserva_sala bd=new BD_reserva_sala("prueba.txt");
+		BD_reserva_sala bd=new BD_reserva_sala("mysql-properties.xml");
 		int id = bd.Ultima_reserva();
 		Vector<Reserva_sala> vectorr = bd.Listar_reserva();
 		for(int i=0;i<vectorr.size();i++) {

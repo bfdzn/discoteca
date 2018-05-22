@@ -15,7 +15,7 @@ public class Clientes {
 	private LocalDate fechaNacimiento;
 	
 	/**
-	 * Instantiates a new clientes.
+	 * Constructor de clientes
 	 *
 	 * @param dni the dni
 	 * @param fechaNacimiento the fecha nacimiento
@@ -28,7 +28,6 @@ public class Clientes {
 
 	/**
 	 * Gets the dni.
-	 *
 	 * @return the dni
 	 */
 	public String getDni() {
@@ -38,7 +37,7 @@ public class Clientes {
 	/**
 	 * Sets the dni.
 	 *
-	 * @param dni the new dni
+	 * @param dni the dni to set
 	 */
 	public void setDni(String dni) {
 		this.dni = dni;
@@ -46,7 +45,6 @@ public class Clientes {
 
 	/**
 	 * Gets the fecha nacimiento.
-	 *
 	 * @return the fecha nacimiento
 	 */
 	public LocalDate getFechaNacimiento() {
@@ -56,10 +54,11 @@ public class Clientes {
 	/**
 	 * Sets the fecha nacimiento.
 	 *
-	 * @param fechaNacimiento the new fecha nacimiento
+	 * @param fechaNacimiento the fechaNacimiento to set
 	 */
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
+	
 }

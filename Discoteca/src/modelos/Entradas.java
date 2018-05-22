@@ -24,7 +24,14 @@ public class Entradas {
 	/** The vendedor. */
 	private String vendedor;
 	
-	
+	/**
+	 * Constructor para Entradas
+	 * @param numEntrada
+	 * @param idEspectaculo
+	 * @param dniEntrada
+	 * @param fecha
+	 * @param vendedor
+	 */
 	
 	/**
 	 * Instantiates a new entradas.
@@ -59,15 +66,15 @@ public class Entradas {
 	 * Sets the num entrada.
 	 *
 	 * @param numEntrada the new num entrada
+	 * @param numEntrada the numEntrada to set
 	 */
 	public void setNumEntrada(int numEntrada) {
 		this.numEntrada = numEntrada;
 	}
-	
 	/**
 	 * Gets the id espectaculo.
 	 *
-	 * @return the id espectaculo
+	 * @return the idEspectaculo
 	 */
 	public int getIdEspectaculo() {
 		return idEspectaculo;
@@ -76,16 +83,16 @@ public class Entradas {
 	/**
 	 * Sets the id espectaculo.
 	 *
-	 * @param idEspectaculo the new id espectaculo
+	 * @param idEspectaculo the idEspectaculo to set
 	 */
 	public void setIdEspectaculo(int idEspectaculo) {
 		this.idEspectaculo = idEspectaculo;
 	}
-	
+
 	/**
 	 * Gets the dni entrada.
 	 *
-	 * @return the dni entrada
+	 * @return the dniEntrada
 	 */
 	public String getDniEntrada() {
 		return dniEntrada;
@@ -94,48 +101,48 @@ public class Entradas {
 	/**
 	 * Sets the dni entrada.
 	 *
-	 * @param dniEntrada the new dni entrada
+	 * @param dniEntrada the dniEntrada to set
 	 */
 	public void setDniEntrada(String dniEntrada) {
 		this.dniEntrada = dniEntrada;
 	}
-	
+
 	/**
 	 * Gets the fecha.
-	 *
 	 * @return the fecha
 	 */
 	public LocalDate getFecha() {
 		return fecha;
 	}
-	
+
 	/**
 	 * Sets the fecha.
 	 *
-	 * @param fecha the new fecha
+	 * @param fecha the fecha to set
 	 */
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
-	
+
 	/**
 	 * Gets the vendedor.
-	 *
 	 * @return the vendedor
 	 */
 	public String getVendedor() {
 		return vendedor;
 	}
+
 	
 	/**
 	 * Sets the vendedor.
 	 *
-	 * @param vendedor the new vendedor
+	 * @param vendedor the vendedor to set
 	 */
 	public void setVendedor(String vendedor) {
 		this.vendedor = vendedor;
 	}
 
+	
 	
 	
 }

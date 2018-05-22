@@ -32,6 +32,7 @@ public class Reserva_sala {
 	
 	/** The bd. */
 	BD_reserva_sala bd=new BD_reserva_sala("prueba.txt");
+//	BD_reserva_sala bd=new BD_reserva_sala("mysql-properties.xml.txt");
 	
 	
 	
@@ -61,6 +62,7 @@ public class Reserva_sala {
 		if(dias_reserva>30)
 			this.precio = (dias_reserva*800);
 	}
+
 	
 	/**
 	 * Instantiates a new reserva sala.
@@ -91,12 +93,14 @@ public class Reserva_sala {
 	 *
 	 * @return the id espectaculo
 	 */
+
 	public int getId_espectaculo() {
 		return id_espectaculo;
 	}
-	
 
-
+	public void setId_espectaculo(int id_espectaculo) {
+		this.id_espectaculo = id_espectaculo;
+	}
 
 	/**
 	 * Gets the vendedor.
@@ -107,7 +111,6 @@ public class Reserva_sala {
 		return vendedor;
 	}
 
-
 	/**
 	 * Sets the vendedor.
 	 *
@@ -116,8 +119,6 @@ public class Reserva_sala {
 	public void setVendedor(String vendedor) {
 		this.vendedor = vendedor;
 	}
-
-
 	/**
 	 * Gets the fecha inicio.
 	 *
@@ -136,7 +137,6 @@ public class Reserva_sala {
 	public void setFecha_inicio(LocalDate fecha_inicio) {
 		this.fecha_inicio = fecha_inicio;
 	}
-
 
 	/**
 	 * Gets the fecha fin.
@@ -157,16 +157,12 @@ public class Reserva_sala {
 		this.fecha_fin = fecha_fin;
 	}
 
-
 	/**
 	 * Gets the precio.
-	 *
-	 * @return the precio
 	 */
 	public int getPrecio() {
 		return precio;
 	}
-
 
 	/**
 	 * Sets the precio.
@@ -176,7 +172,6 @@ public class Reserva_sala {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
-
 
 	/**
 	 * Gets the dni cliente.
@@ -196,5 +191,22 @@ public class Reserva_sala {
 	public void setDni_cliente(String dni_cliente) {
 		this.dni_cliente = dni_cliente;
 	}
+
+	/**
+	 * @return the bd
+	 */
+	public BD_reserva_sala getBd() {
+		return bd;
+	}
+
+	/**
+	 * @param bd the bd to set
+	 */
+	public void setBd(BD_reserva_sala bd) {
+		this.bd = bd;
+	}
+
+
+	
 	
 }

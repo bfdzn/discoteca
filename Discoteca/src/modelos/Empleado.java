@@ -32,10 +32,10 @@ public class Empleado {
 	private double precioHora;
 
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
+	/**
+	 * toString de la informacion del empleado
+	 */
 	public String toString() {
 		return "Empleado [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", oficio=" + oficio
 				+ ", fechaAlta=" + fechaAlta + ", contraseña=" + contraseña + ", precioHora=" + precioHora + "]";
@@ -151,8 +151,8 @@ public class Empleado {
 	}
 	
 	/**
-	 * Instantiates a new empleado.
-	 *
+	 * Constructor del Empleado
+	 * 
 	 * @param dni the dni
 	 * @param nombre the nombre
 	 * @param apellido the apellido
@@ -171,16 +171,14 @@ public class Empleado {
 		this.contraseña = contraseña;
 		this.precioHora = precioHora;
 	}
-	
+
+
 	/**
-	 * Gets the precio hora.
-	 *
-	 * @return the precio hora
+	 * @return the precioHora
 	 */
 	public double getPrecioHora() {
 		return precioHora;
 	}
-	
 	/**
 	 * Sets the precio hora.
 	 *
@@ -189,6 +187,7 @@ public class Empleado {
 	public void setPrecioHora(double precioHora) {
 		this.precioHora = precioHora;
 	}
+	
 	
 	
 	

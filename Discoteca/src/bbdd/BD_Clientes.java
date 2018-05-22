@@ -29,10 +29,9 @@ public class BD_Clientes extends BD_Conector{
 		super(fileName);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
-	 * Añadir cliente.
-	 *
+	 * Añade un cliente a la bbdd
 	 * @param cliente the cliente
 	 * @return the int
 	 */
@@ -52,10 +51,9 @@ public class BD_Clientes extends BD_Conector{
 			return -1;
 		}
 	}
-	
+
 	/**
-	 * Buscar cliente.
-	 *
+	 * Busca un cliente dado su dni
 	 * @param dni the dni
 	 * @return the clientes
 	 */
@@ -82,10 +80,9 @@ public class BD_Clientes extends BD_Conector{
 			return null;			
 		}
 	}
-	
+
 	/**
-	 * Listado clientes.
-	 *
+	 * Retorna un listado con todos los clientes
 	 * @return the vector
 	 */
 	public  Vector<Clientes> listadoClientes(){
