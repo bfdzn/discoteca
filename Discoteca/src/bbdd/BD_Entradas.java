@@ -40,10 +40,16 @@ public class BD_Entradas extends BD_Conector {
 	 * @return the int
 	 */
 	public int añadir_Entrada(Entradas entrada) {
-		String cadenaSQL = "INSERT INTO entradas2 VALUES('" + entrada.getNumEntrada() + "','" + entrada.getDniEntrada()
+		String cadenaSQL = null;
+		if(!(entrada.getVendedor()==null)) {
+		    cadenaSQL = "INSERT INTO entradas2 VALUES('" + entrada.getNumEntrada() + "','" + entrada.getDniEntrada()
 				+ "','" + entrada.getIdEspectaculo() + "','" + entrada.getFecha() + "','" + entrada.getVendedor()
 				+ "')";
-
+		}else {
+			cadenaSQL = "INSERT INTO entradas2 VALUES('" + entrada.getNumEntrada() + "','" + entrada.getDniEntrada()
+			+ "','" + entrada.getIdEspectaculo() + "','" + entrada.getFecha() + "', null)";
+		}
+		System.out.println(cadenaSQL);
 		try {
 			this.abrir();
 			s = c.createStatement();
@@ -85,10 +91,7 @@ public class BD_Entradas extends BD_Conector {
 	/**
 	 * Listar entradas mes.
 	 *
-	 * @param mes
-	 *            the mes
-	 * @param ano
-	 *            the ano
+	 * @param mesAno the mes ano
 	 * @return the vector
 	 */
 	public Vector<Entradas> Listar_entradas_mes(String mesAno) {// esto sería más fácil que nos devolviera una select
@@ -119,25 +122,27 @@ public class BD_Entradas extends BD_Conector {
 	/**
 	 * Numero entrada.
 	 *
-	 * @param id
-	 *            the id
+	 * @param id            the id
+	 * @param fecha the fecha
 	 * @return the int
 	 */
-	public int numeroEntrada(int id) {
-		String cadenaSQL = "SELECT MAX(NUMENTRADA) FROM ENTRADAS WHERE idEspectaculo ='" + id + "'";
+	public int numeroEntrada(int id, LocalDate fecha) {
+		String cadenaSQL = "SELECT MAX(NUMENTRADA) ENT FROM ENTRADAS2 WHERE idEspectaculo ='" + id + "' AND FECHA = '"+fecha+"'";
+		System.out.println(cadenaSQL);
 		try {
 			int maxEntrada = 0;
 			this.abrir();
 			s = c.createStatement();
 			reg = s.executeQuery(cadenaSQL);
 			if (reg.next()) {
-				maxEntrada = reg.getInt("NUMENTRADA");
-				
+				maxEntrada = reg.getInt("ENT");
 			}
 			s.close();
 			this.cerrar();
+			System.out.println(maxEntrada);
 			return maxEntrada;
 		} catch (SQLException e) {
+			System.out.println(e);
 			return 0;
 		}
 	}

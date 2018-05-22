@@ -32,6 +32,9 @@ public class Empleado {
 	private double precioHora;
 
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	/**
 	 * toString de la informacion del empleado
@@ -151,8 +154,8 @@ public class Empleado {
 	}
 	
 	/**
-	 * Constructor del Empleado
-	 * 
+	 * Constructor del Empleado.
+	 *
 	 * @param dni the dni
 	 * @param nombre the nombre
 	 * @param apellido the apellido
@@ -174,6 +177,8 @@ public class Empleado {
 
 
 	/**
+	 * Gets the precio hora.
+	 *
 	 * @return the precioHora
 	 */
 	public double getPrecioHora() {

@@ -15,7 +15,7 @@ public class Clientes {
 	private LocalDate fechaNacimiento;
 	
 	/**
-	 * Constructor de clientes
+	 * Constructor de clientes.
 	 *
 	 * @param dni the dni
 	 * @param fechaNacimiento the fecha nacimiento

@@ -187,6 +187,11 @@ public class BD_Espectaculos extends BD_Conector {
 		}
 	}
 
+	/**
+	 * Buscar max.
+	 *
+	 * @return the int
+	 */
 	public int buscarMax(){
 
 		String cadena = "SELECT MAX(IDESPECTACULO) id FROM espectaculos2 ";

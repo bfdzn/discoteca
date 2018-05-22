@@ -31,7 +31,8 @@ public class BD_Clientes extends BD_Conector{
 	}
 
 	/**
-	 * Añade un cliente a la bbdd
+	 * Añade un cliente a la bbdd.
+	 *
 	 * @param cliente the cliente
 	 * @return the int
 	 */
@@ -53,7 +54,8 @@ public class BD_Clientes extends BD_Conector{
 	}
 
 	/**
-	 * Busca un cliente dado su dni
+	 * Busca un cliente dado su dni.
+	 *
 	 * @param dni the dni
 	 * @return the clientes
 	 */
@@ -82,7 +84,8 @@ public class BD_Clientes extends BD_Conector{
 	}
 
 	/**
-	 * Retorna un listado con todos los clientes
+	 * Retorna un listado con todos los clientes.
+	 *
 	 * @return the vector
 	 */
 	public  Vector<Clientes> listadoClientes(){

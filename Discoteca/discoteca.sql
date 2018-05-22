@@ -66,6 +66,9 @@ CREATE TABLE IF NOT EXISTS `empleados2` (
 
 INSERT INTO `empleados2` (`DNI_EMPLEADO`, `NOMBRE`, `APELLIDO`, `OFICIO`, `FECHA_ALTA`, `CONTRASEÑA`,`PRECIO_HORA`) VALUES
 ('00000000A', 'Pepe', 'Garcia', 'VENDEDOR', '2000-05-01', 'a1a1a1a1','5');
+INSERT INTO `empleados2` (`DNI_EMPLEADO`, `NOMBRE`, `APELLIDO`, `OFICIO`, `FECHA_ALTA`, `CONTRASEÑA`,`PRECIO_HORA`) VALUES ('1', 'Pepe', 'Garcia', 'ADMIN', '2000-05-01', '1','5');
+INSERT INTO `empleados2` (`DNI_EMPLEADO`, `NOMBRE`, `APELLIDO`, `OFICIO`, `FECHA_ALTA`, `CONTRASEÑA`,`PRECIO_HORA`) VALUES ('2', 'Pepe', 'Garcia', 'ADMIN', '2000-05-01', '2','5');
+
 
 -- --------------------------------------------------------
 
@@ -78,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `entradas2` (
   `DNIENTRADA` varchar(9) NOT NULL,
   `IDESPECTACULO` int(9) NOT NULL,
   `FECHA` date NOT NULL,
-  `VENDEDOR` varchar(9) NOT NULL,
+  `VENDEDOR` varchar(9),
   PRIMARY KEY (`NUMENTRADA`,`IDESPECTACULO`,`FECHA`),
   KEY `IDESPECTACULO` (`IDESPECTACULO`),
   KEY `VENDEDOR` (`VENDEDOR`)
@@ -144,15 +147,13 @@ INSERT INTO `parte_horas2` (`DNI_EMPLEADO`, `FECHA`, `HORAS`, `SALARIO`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `reserva_sala2` (
-  `IDESPECTACULO` int(5) NOT NULL,
-  `VENDEDOR` varchar(9) NOT NULL,
+  `VENDEDOR` varchar(9) ,
   `FECHA_INICIO` date NOT NULL,
   `FECHA_FIN` date NOT NULL,
   `PRECIO` decimal(10,0) NOT NULL,
   `DNI_CLIENTE` varchar(9) NOT NULL,
-  PRIMARY KEY (`IDESPECTACULO`,`FECHA_INICIO`),
+  PRIMARY KEY (`FECHA_INICIO`),
   KEY `VENDEDOR` (`VENDEDOR`),
-  KEY `IDESPECTACULO` (`IDESPECTACULO`),
   KEY `DNI_CLIENTE` (`DNI_CLIENTE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -160,8 +161,8 @@ CREATE TABLE IF NOT EXISTS `reserva_sala2` (
 -- Volcado de datos para la tabla `reserva_sala2`
 --
 
-INSERT INTO `reserva_sala2` (`IDESPECTACULO`, `VENDEDOR`, `FECHA_INICIO`, `FECHA_FIN`, `PRECIO`, `DNI_CLIENTE`) VALUES
-(1, '00000000A', '2019-01-01', '2019-01-02', '2999', '13131313D');
+INSERT INTO `reserva_sala2` (`VENDEDOR`, `FECHA_INICIO`, `FECHA_FIN`, `PRECIO`, `DNI_CLIENTE`) VALUES
+('00000000A', '2019-01-01', '2019-01-02', '2999', '13131313D');
 
 --
 -- Restricciones para tablas volcadas
@@ -188,7 +189,7 @@ ALTER TABLE `parte_horas2`
 -- Filtros para la tabla `reserva_sala2`
 --
 ALTER TABLE `reserva_sala2`
-  ADD CONSTRAINT `reserva_sala2_ibfk_1` FOREIGN KEY (`IDESPECTACULO`) REFERENCES `espectaculos2` (`IDESPECTACULO`),
+  
   ADD CONSTRAINT `reserva_sala2_ibfk_2` FOREIGN KEY (`VENDEDOR`) REFERENCES `empleados2` (`DNI_EMPLEADO`),
   ADD CONSTRAINT `reserva_sala2_ibfk_3` FOREIGN KEY (`DNI_CLIENTE`) REFERENCES `clientes2` (`DNI_CLIENTE`);
 

@@ -104,8 +104,7 @@ public class BD_parte_horas extends BD_Conector{
 	/**
 	 * Listar parte horas mes dni.
 	 *
-	 * @param mes the mes
-	 * @param ano the ano
+	 * @param anoMes the ano mes
 	 * @param dni the dni
 	 * @return the vector
 	 */

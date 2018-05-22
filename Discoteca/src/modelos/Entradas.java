@@ -25,12 +25,13 @@ public class Entradas {
 	private String vendedor;
 	
 	/**
-	 * Constructor para Entradas
-	 * @param numEntrada
-	 * @param idEspectaculo
-	 * @param dniEntrada
-	 * @param fecha
-	 * @param vendedor
+	 * Constructor para Entradas.
+	 *
+	 * @param numEntrada the num entrada
+	 * @param idEspectaculo the id espectaculo
+	 * @param dniEntrada the dni entrada
+	 * @param fecha the fecha
+	 * @param vendedor the vendedor
 	 */
 	
 	/**
@@ -65,7 +66,6 @@ public class Entradas {
 	/**
 	 * Sets the num entrada.
 	 *
-	 * @param numEntrada the new num entrada
 	 * @param numEntrada the numEntrada to set
 	 */
 	public void setNumEntrada(int numEntrada) {
