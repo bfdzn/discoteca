@@ -8,15 +8,34 @@ import java.util.*;
 import modelos.*;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BD_Clientes.
+ */
 public class BD_Clientes extends BD_Conector{
 	
+	/** The s. */
 	private static Statement s;	
+	
+	/** The reg. */
 	private static ResultSet reg;
 	
+	/**
+	 * Instantiates a new b D clientes.
+	 *
+	 * @param fileName the file name
+	 */
 	public BD_Clientes(String fileName) {
 		super(fileName);
 		// TODO Auto-generated constructor stub
 	}
+	
+	/**
+	 * Añadir cliente.
+	 *
+	 * @param cliente the cliente
+	 * @return the int
+	 */
 	public  int añadir_Cliente( Clientes cliente){	
 		String cadenaSQL="INSERT INTO CLIENTES2 VALUES('" + cliente.getDni() + "','" +
 		cliente.getFechaNacimiento()+"')"; 	
@@ -33,6 +52,13 @@ public class BD_Clientes extends BD_Conector{
 			return -1;
 		}
 	}
+	
+	/**
+	 * Buscar cliente.
+	 *
+	 * @param dni the dni
+	 * @return the clientes
+	 */
 	public Clientes buscarCliente(String dni){
 		String cadenaSQL="SELECT * from clientes2 WHERE DNI_CLIENTE='"+dni+"'";
 		Clientes retorno = null;
@@ -56,6 +82,12 @@ public class BD_Clientes extends BD_Conector{
 			return null;			
 		}
 	}
+	
+	/**
+	 * Listado clientes.
+	 *
+	 * @return the vector
+	 */
 	public  Vector<Clientes> listadoClientes(){
 		String cadenaSQL="SELECT * from CLIENTES2";
 		Vector<Clientes> listaClientes=new Vector<Clientes>();

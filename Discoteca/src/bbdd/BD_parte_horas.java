@@ -13,13 +13,25 @@ import modelos.Reserva_sala;;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BD_parte_horas.
+ */
 public class BD_parte_horas extends BD_Conector{
 	
 	
 	
+	/** The s. */
 	private static Statement s;	
+	
+	/** The reg. */
 	private static ResultSet reg;
 	
+	/**
+	 * Instantiates a new b D parte horas.
+	 *
+	 * @param fileName the file name
+	 */
 	public BD_parte_horas(String fileName) {
 		super(fileName);
 		// TODO Auto-generated constructor stub
@@ -27,6 +39,15 @@ public class BD_parte_horas extends BD_Conector{
 	
 	
 	
+	/**
+	 * Añadir parte horas.
+	 *
+	 * @param dni the dni
+	 * @param fecha the fecha
+	 * @param horas the horas
+	 * @param precioHoras the precio horas
+	 * @return the int
+	 */
 	public int añadir_parte_horas (String dni,LocalDate fecha,int horas,Double precioHoras) {
 		double importe = horas*precioHoras;
 		
@@ -41,10 +62,18 @@ public class BD_parte_horas extends BD_Conector{
 			this.cerrar();
 			return filas;
 			}
-			catch ( SQLException e){			
+			catch ( SQLException e){	
+				System.err.println(e);
 				return -1;
 			}
 	}
+	
+	/**
+	 * Listar parte horas dni.
+	 *
+	 * @param dni the dni
+	 * @return the vector
+	 */
 	public  Vector<ParteHoras> Listar_parte_horas_dni(String dni){
 		String cadenaSQL="SELECT * from parte_horas2 ";
 		Vector<ParteHoras> lista_parte_horas=new Vector<ParteHoras>();
@@ -72,28 +101,32 @@ public class BD_parte_horas extends BD_Conector{
 		}
 	}
 
-	public  Vector<ParteHoras> Listar_parte_horas_mes_dni(int mes, int ano, String dni){
-		String cadenaSQL="SELECT * from parte_horas2 WHERE DNI_EMPLEADO='"+dni+"'";
-		Vector<ParteHoras> lista_parte_horas=new Vector<ParteHoras>();
+	/**
+	 * Listar parte horas mes dni.
+	 *
+	 * @param mes the mes
+	 * @param ano the ano
+	 * @param dni the dni
+	 * @return the vector
+	 */
+	public  double[] Listar_parte_horas_mes_dni(String anoMes, String dni){
+		String cadenaSQL="SELECT sum(salario) importe, sum(horas) horaT FROM `parte_horas2` where DATE_FORMAT(FECHA,'%m%Y') = '"+anoMes+"' and DNI_EMPLEADO = '"+dni+"'";
+		double [] importes = new double[2] ;
 		try{
 			this.abrir();
 			s=c.createStatement();
 			reg=s.executeQuery(cadenaSQL);
 			
 			while ( reg.next()){
-				java.sql.Date f1=reg.getDate("FECHA");
-				LocalDate fecha1=f1.toLocalDate();
-				if(fecha1.getMonthValue() == mes && fecha1.getYear() == ano) {
-				lista_parte_horas.add(new ParteHoras(reg.getString("DNI_EMPLEADO"),
-						fecha1,reg.getInt("HORAS"),reg.getDouble("IMPORTE")));
-				}
-
+				importes[0] = reg.getDouble("importe");
+				importes[1] = reg.getDouble("horaT");
 				}
 			s.close();
 			this.cerrar();
-			return lista_parte_horas;
+			return importes;
 		}
-		catch ( SQLException e){		
+		catch ( SQLException e){	
+			System.err.println(e);
 			return null;			
 		}
 	}
@@ -101,6 +134,12 @@ public class BD_parte_horas extends BD_Conector{
 
 	
 	
+	/**
+	 * Listar parte horas fecha.
+	 *
+	 * @param fecha the fecha
+	 * @return the vector
+	 */
 	public  Vector<ParteHoras> Listar_parte_horas_fecha(Date fecha){
 		String cadenaSQL="SELECT * from parte_horas2 ";
 		Vector<ParteHoras> lista_parte_horas=new Vector<ParteHoras>();

@@ -11,11 +11,23 @@ import modelos.Reserva_sala;;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BD_reserva_sala.
+ */
 public class BD_reserva_sala extends BD_Conector{
 	
+	/** The s. */
 	private static Statement s;	
+	
+	/** The reg. */
 	private static ResultSet reg;
 	
+	/**
+	 * Instantiates a new b D reserva sala.
+	 *
+	 * @param fileName the file name
+	 */
 	public BD_reserva_sala(String fileName) {
 		super(fileName);
 		// TODO Auto-generated constructor stub
@@ -24,6 +36,11 @@ public class BD_reserva_sala extends BD_Conector{
 	
 	
 	
+	/**
+	 * Listar reserva.
+	 *
+	 * @return the vector
+	 */
 	public  Vector<Reserva_sala> Listar_reserva(){
 		String cadenaSQL="SELECT * from reserva_sala2 ";
 		Vector<Reserva_sala> lista_reservas=new Vector<Reserva_sala>();
@@ -50,6 +67,12 @@ public class BD_reserva_sala extends BD_Conector{
 			return null;			
 		}
 	}
+	
+	/**
+	 * Ultima reserva.
+	 *
+	 * @return the int
+	 */
 	public int Ultima_reserva() {
 		Vector <Reserva_sala> auxiliar = Listar_reserva();
 		for(int i=0;i<auxiliar.size();i++) {
@@ -61,6 +84,15 @@ public class BD_reserva_sala extends BD_Conector{
 	}
 	
 	
+	/**
+	 * Añadir reserva.
+	 *
+	 * @param fecha1 the fecha 1
+	 * @param fecha2 the fecha 2
+	 * @param dniv the dniv
+	 * @param dnic the dnic
+	 * @return the int
+	 */
 	public int añadir_reserva (LocalDate fecha1,LocalDate fecha2,String dniv,String dnic) {
 		
 		
@@ -82,6 +114,11 @@ public class BD_reserva_sala extends BD_Conector{
 			}
 	}
 	
+	/**
+	 * Esta libre.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean esta_libre () {
 		LocalDate fechaActual = LocalDate.now();
 		BD_reserva_sala bd=new BD_reserva_sala("prueba.txt");

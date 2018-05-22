@@ -13,8 +13,18 @@ import modelos.Entradas;
 import modelos.Espectaculos;
 import modelos.ParteHoras;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Principal.
+ */
 public class Principal {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		BD_Empleado bdempleado = new BD_Empleado("mysql-properties.xml");
@@ -22,6 +32,7 @@ public class Principal {
 		BD_Espectaculos bdespectaculos = new BD_Espectaculos("mysql-properties.xml");
 		BD_Entradas bdentradas = new BD_Entradas("mysql-properties.xml");
 		int filas = 0;
+		DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("dd/LL/yyyy");
 
 		int opcion = 0;
 		while (opcion != 1 && opcion != 2) {
@@ -32,9 +43,9 @@ public class Principal {
 		}
 
 		switch (opcion) {
-		case 1://menu cliente
+		case 1:// menu cliente
 			System.out.println("1.Solicitar entradas");
-			System.out.println("2.Solicitar reserva entradas");
+			System.out.println("2.Solicitar reserva sala");
 			break;
 		case 2:
 			Empleado usuario = null;
@@ -57,7 +68,7 @@ public class Principal {
 				opcion = 0;
 				while (opcion != 6) {
 					System.out.println("Introduce opción");
-					System.out.println("1.Alta espectáculo/Borrar Espectaculo/Listar espectáculos");
+					System.out.println("1.Alta espectáculo/Listar espectáculos");
 					System.out.println("2.Alta/Baja alquiler sala");
 					System.out.println("3.Revisar informe de horas");
 					System.out.println("4.Revisar facturación por mes");
@@ -71,16 +82,13 @@ public class Principal {
 						opcion = 0;
 						while (opcion != 4) {
 							System.out.println("1.Alta espectáculo");
-							System.out.println("2.Borrar espectáculo");
-							System.out.println("3.Listar espectáculos");
-							System.out.println("4.Salir");
+							System.out.println("2.Listar espectáculos");
+							System.out.println("3.Salir");
 							opcion = sc.nextInt();
 							sc.nextLine();
 							switch (opcion) {
 							case 1:
-								System.out.println("Introduce idEspectaculo");
-								int idEspectaculo = sc.nextInt();
-								sc.nextLine();
+								int idEspectaculo = bdespectaculos.buscarMax();
 								System.out.println("Introduce nombre de espectáculo");
 								String nombreEspectaculo = sc.nextLine();
 								LocalDate fechaInicio = null;
@@ -88,6 +96,10 @@ public class Principal {
 									System.out.println("Introduce fecha inicio en el siguiente formato dd/LL/yyyy");
 									String fechaAnotada = sc.nextLine();
 									fechaInicio = fechaformateada(fechaAnotada);
+									if (fechaInicio.isBefore(LocalDate.now())) {
+										System.out.println("La fecha anotada es anterior a la actual");
+										break;
+									}
 
 								}
 								LocalDate fechaFin = null;
@@ -95,6 +107,13 @@ public class Principal {
 									System.out.println("Introduce fecha fin en el siguiente formato dd/LL/yyyy");
 									String fechaAnotada2 = sc.nextLine();
 									fechaFin = fechaformateada(fechaAnotada2);
+									if (fechaFin.isAfter(LocalDate.now())) {
+										System.out.println("La fecha introducida es anterior a la actual");
+										break;
+									} else if (fechaFin.isBefore(fechaInicio)) {
+										System.out.println("La fecha de fin es superior a la fecha de inicio");
+										break;
+									}
 
 								}
 								System.out.println("Introduzca precio espectáculo");
@@ -122,8 +141,16 @@ public class Principal {
 									System.out.println("Problemas técnicos");
 									break;
 								}
-							case 2:
 								/*
+								 * Teniamos pensado crear un método que borrará los espectáculos, aunque a la
+								 * hora de codificar nos hemos dado cuenta que se borraría la foreign key de
+								 * entradas y de reserva salas, por lo que no tiene sentido borrarlo de la base
+								 * de datos. Es importante que se siga manteniendo para así poder controlar un
+								 * histórico de facturación que está vinculado tanto a las entradas como a los
+								 * espectáculos.
+								 * 
+								 *
+								 *
 								 * System.out.println("Introduzca la id del espectáculo a borrar"); int idBorrar
 								 * = sc.nextInt(); Espectaculos espectaculoBorrar =
 								 * bdespectaculos.buscarEspectaculo(idBorrar); if(espectaculoBorrar == null) {
@@ -131,14 +158,10 @@ public class Principal {
 								 * { bdespectaculos.borrar_Espectaculo(espectaculoBorrar); }
 								 */
 								break;
-							case 3:
-								Vector<Espectaculos> listarEspectaculos = bdespectaculos.listarEspectaculos();
-								for (int i = 0; i < listarEspectaculos.size(); i++) {
-									System.out.println(listarEspectaculos.get(i).toString());
-
-								}
+							case 2:
+								listarEspectaculos(bdespectaculos);
 								break;
-							case 4:
+							case 3:
 								System.out.println("Saliendo pantalla espectáculo");
 								break;
 							}
@@ -149,62 +172,59 @@ public class Principal {
 						break;
 					case 3: // Control del informe de horas
 						System.out.println("Introduzca el mes y el año del cuál quiere sacar el parte de horas");
-						System.out.println("Año");
-						int ano = sc.nextInt();
-						System.out.println("Mes");
-						int mes = sc.nextInt();
-						sc.nextLine();
-						
-						sc.nextLine();
+						System.out.println("Introduce el mes");
+						String mesfp = sc.nextLine();
+						if (mesfp.length() == 1) {
+							mesfp = '0' + mesfp;
+						}
+						System.out.println("Introduce el año");
+						String anofp = sc.nextLine();
+						String mesAnoP = mesfp + anofp;
+
 						System.out.println("Introduzca el dni del empleado del cuál quiere listar las horas");
 						String dniListar = sc.nextLine();
-						Vector<ParteHoras> parteMes = bdhoras.Listar_parte_horas_mes_dni(mes, ano, dniListar);
+						double[] parteMes = bdhoras.Listar_parte_horas_mes_dni(mesAnoP, dniListar);
 						if (parteMes == null) {
 							System.out.println("Fallo del sistema");
 						} else {
-							double salario = 0;
-							int horas = 0;
-							for (int i = 0; i < parteMes.size(); i++) {
-								salario = +parteMes.get(i).getSalario();
-								horas = +parteMes.get(i).getHoras();
-							}
+							
 							System.out.println("Al empleado con dni: " + dniListar + "le corresponden: ");
-							System.out.println(salario + " euros por");
-							System.out.println(horas + " horas.");
+							System.out.println(parteMes[0] + " euros por");
+							System.out.println(parteMes[1] + " horas.");
 						}
 
 						break;
 					case 4:// Revisar la facturación mensual
 						System.out.println("Introduce el mes");
-						int mesf = sc.nextInt();
+						String mesf = sc.nextLine();
+						if (mesf.length() == 1) {
+							mesf = '0' + mesf;
+						}
 						System.out.println("Introduce el año");
-						int anof = sc.nextInt();
-						Vector<Entradas> entradas = bdentradas.Listar_entradas_mes(mesf, anof);
+						String anof = sc.nextLine();
+						String mesAno = mesf + anof;
+						Vector<Entradas> entradas = bdentradas.Listar_entradas_mes(mesAno);
 						if (entradas == null) {
 							System.out.println("Fallo del sistema");
 						} else {
 							double recaudacion = 0;
 							for (int i = 0; i < entradas.size(); i++) {
 								try {
+									System.out.println("Hola");
 									double precioH = bdespectaculos.buscarPrecio(entradas.get(i).getIdEspectaculo());
-									 recaudacion = recaudacion+precioH;
-									 
+									recaudacion = recaudacion + precioH;
+
 								} catch (EspectaculoNoExiste e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 							}
-							System.out.println("El mes "+mesf+" del año "+anof);
-							System.out.println("Se recaudaron en total :"+recaudacion);
+							System.out.println("El mes " + mesf + " del año " + anof);
+							System.out.println("Se recaudaron en total :" + recaudacion);
 						}
-						
-						
-						
-						
+
 						break;
-						
-						
-						
+
 					case 5:// Dar de alta a un empleado
 						System.out.println("Introduce dniEmpleado");
 						String dniEmpleado = sc.nextLine();
@@ -257,6 +277,12 @@ public class Principal {
 
 					switch (opcion) {
 					case 1:// Mandar un informe de horas
+						/*
+						 * Solo se puede generar un parte de horas por día estamos controlando por tanto
+						 * que la sala solo tiene un espectáculo si quisieramos fichar en distintas
+						 * horas habría que insertar un autonúmerico en la tabla de parte_horas
+						 */
+						System.out.println("Solo se puede generar un parte de horas por día");
 						System.out.println("Introduce numero horas");
 						int horas = sc.nextInt();
 						filas = 0;
@@ -278,30 +304,60 @@ public class Principal {
 
 					case 2:// Vender entradas
 						System.out.println("Vender entrada");
+						listarEspectaculosF(bdespectaculos);
 						System.out.println("Introduce el número espectáculo");
 						int idEntradaEspect = sc.nextInt();
 						sc.nextLine();
+						LocalDate fecha = null;
 						try {
 							Espectaculos especEntrada = bdespectaculos.buscarEspectaculo(idEntradaEspect);
 							if (especEntrada == null) {
 								System.out.println("Problemas técnicos");
 								break;
 							} else {
+								boolean validarFecha = false;
+								while (validarFecha == false) {
+									System.out.println(
+											"Introduce fecha del espectaculo entre " + especEntrada.getFechaInicio()
+													+ " y " + especEntrada.getFechaFin() + " en el formato dd/mm/yyyy");
+									String fechaEntrada = sc.nextLine();
+									try {
+										fecha = LocalDate.parse(fechaEntrada, fechaFormateada);
+										System.out.println(fecha);
+										System.out.println();
+										if (!(fecha.isBefore(especEntrada.getFechaInicio())
+												|| fecha.isAfter(especEntrada.getFechaFin()))) {
+											System.out.println("Fecha correcta");
+											validarFecha = true;
+										} else {
+											System.out.println("Fecha introducida antes o después del espectáculo");
+										}
+
+									} catch (DateTimeParseException e) {
+										System.out.println("Formato incorrecto");
+										sc.nextLine();
+										return;
+									}
+
+								}
+
 								int numEntrada = bdentradas.numeroEntrada(idEntradaEspect);
 								if (especEntrada.getAforo() == numEntrada) {
 									System.out.println("El espectáculo tiene el aforo completo");
 									break;
 								} else {
+									numEntrada++;
 									System.out.println("Introduce el dni del comprador");
 									String dniEntrada = sc.nextLine();
-									Entradas altaEntrada = new Entradas(numEntrada, idEntradaEspect, dniEntrada,
-											LocalDate.now(), usuario.getDni());
+
+									Entradas altaEntrada = new Entradas(numEntrada, idEntradaEspect, dniEntrada, fecha,
+											usuario.getDni());
 									filas = 0;
 									filas = bdentradas.añadir_Entrada(altaEntrada);
 									if (filas == -1) {
 										System.out.println("Problemas técnicos");
 									} else {
-										System.out.println("Empleado añadido");
+										System.out.println("Entrada vendida");
 									}
 
 								}
@@ -311,6 +367,11 @@ public class Principal {
 							System.out.println("El espectáculo del que quiere comprar entradas no existe en la BBDD");
 							break;
 						}
+						break;
+
+					case 3: // Salir del programa
+						System.out.println("Saliendo programa");
+						break;
 
 					}
 
@@ -322,6 +383,15 @@ public class Principal {
 
 	}
 
+	/**
+	 * Fechaformateada.
+	 *
+	 * @param fecha
+	 *            the fecha
+	 * @return the local date
+	 * @throws DateTimeParseException
+	 *             the date time parse exception
+	 */
 	public static LocalDate fechaformateada(String fecha) throws DateTimeParseException {
 		DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("dd/LL/yyyy");
 
@@ -334,4 +404,22 @@ public class Principal {
 			return null;
 		}
 	}
+
+	public static void listarEspectaculos(BD_Espectaculos bdespectaculos) {
+		Vector<Espectaculos> listarEspectaculos = bdespectaculos.listarEspectaculos();
+		for (int i = 0; i < listarEspectaculos.size(); i++) {
+			System.out.println(listarEspectaculos.get(i).toString());
+
+		}
+	}
+
+	public static void listarEspectaculosF(BD_Espectaculos bdespectaculos) {
+		Vector<Espectaculos> listarEspectaculos = bdespectaculos.listarEspectaculos();
+		for (int i = 0; i < listarEspectaculos.size(); i++) {
+			if (listarEspectaculos.get(i).getFechaFin().isAfter(LocalDate.now())) {
+				System.out.println(listarEspectaculos.get(i).toString());
+			}
+		}
+	}
+
 }

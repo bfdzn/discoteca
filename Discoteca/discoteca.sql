@@ -56,8 +56,7 @@ CREATE TABLE IF NOT EXISTS `empleados2` (
   `OFICIO` varchar(12) NOT NULL,
   `FECHA_ALTA` date NOT NULL,
   `CONTRASEÑA` varchar(12) NOT NULL,
-  `FECHA_HORA` decimal(10,2) NOT NULL,
-  `PRECIO_HORA` decimal(10,2) NOT NULL;
+  `PRECIO_HORA` decimal(10,2) NOT NULL,
   PRIMARY KEY (`DNI_EMPLEADO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -65,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `empleados2` (
 -- Volcado de datos para la tabla `empleados2`
 --
 
-INSERT INTO `empleados2` (`DNI_EMPLEADO`, `NOMBRE`, `APELLIDO`, `OFICIO`, `FECHA_ALTA`, `CONTRASEÑA`) VALUES
+INSERT INTO `empleados2` (`DNI_EMPLEADO`, `NOMBRE`, `APELLIDO`, `OFICIO`, `FECHA_ALTA`, `CONTRASEÑA`,`PRECIO_HORA`) VALUES
 ('00000000A', 'Pepe', 'Garcia', 'VENDEDOR', '2000-05-01', 'a1a1a1a1','5');
 
 -- --------------------------------------------------------
@@ -80,8 +79,7 @@ CREATE TABLE IF NOT EXISTS `entradas2` (
   `IDESPECTACULO` int(9) NOT NULL,
   `FECHA` date NOT NULL,
   `VENDEDOR` varchar(9) NOT NULL,
-  PRIMARY KEY (`NUMENTRADA`,`IDESPECTACULO`),
-  KEY `DNIENTRADA` (`DNIENTRADA`),
+  PRIMARY KEY (`NUMENTRADA`,`IDESPECTACULO`,`FECHA`),
   KEY `IDESPECTACULO` (`IDESPECTACULO`),
   KEY `VENDEDOR` (`VENDEDOR`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -173,7 +171,10 @@ INSERT INTO `reserva_sala2` (`IDESPECTACULO`, `VENDEDOR`, `FECHA_INICIO`, `FECHA
 -- Filtros para la tabla `entradas2`
 --
 ALTER TABLE `entradas2`
-  ADD CONSTRAINT `entradas2_ibfk_1` FOREIGN KEY (`DNIENTRADA`) REFERENCES `clientes2` (`DNI_CLIENTE`),
+  /*Suprimo este constraint porque no nos hace falta que el dni del cliente esté dado
+    de alta para venderle entradas.
+  
+  --ADD CONSTRAINT `entradas2_ibfk_1` FOREIGN KEY (`DNIENTRADA`) REFERENCES `clientes2` (`DNI_CLIENTE`),*/
   ADD CONSTRAINT `entradas2_ibfk_2` FOREIGN KEY (`IDESPECTACULO`) REFERENCES `espectaculos2` (`IDESPECTACULO`),
   ADD CONSTRAINT `entradas2_ibfk_3` FOREIGN KEY (`VENDEDOR`) REFERENCES `empleados2` (`DNI_EMPLEADO`);
 

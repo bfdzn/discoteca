@@ -2,13 +2,28 @@ package modelos;
 
 import java.time.LocalDate;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Espectaculos.
+ */
 public class Espectaculos {
 	
+	/** The id espectaculo. */
 	private int idEspectaculo;
+	
+	/** The nombre espectaculo. */
 	private String nombreEspectaculo;
+	
+	/** The fecha inicio. */
 	private LocalDate fechaInicio;
+	
+	/** The fecha fin. */
 	private LocalDate fechaFin;
+	
+	/** The precio entrada. */
 	private double precioEntrada;
+	
+	/** The aforo. */
 	private int aforo;
 	
 	
@@ -16,12 +31,14 @@ public class Espectaculos {
 	
 
 	/**
-	 * @param idEspectaculo
-	 * @param nombreEspectaculo
-	 * @param fechaInicio
-	 * @param fechaFin
-	 * @param precioEntrada
-	 * @param aforo
+	 * Instantiates a new espectaculos.
+	 *
+	 * @param idEspectaculo the id espectaculo
+	 * @param nombreEspectaculo the nombre espectaculo
+	 * @param fechaInicio the fecha inicio
+	 * @param fechaFin the fecha fin
+	 * @param precioEntrada the precio entrada
+	 * @param aforo the aforo
 	 */
 	public Espectaculos(int idEspectaculo, String nombreEspectaculo, LocalDate fechaInicio, LocalDate fechaFin,
 			double precioEntrada, int aforo) {
@@ -39,6 +56,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Gets the id espectaculo.
+	 *
 	 * @return the idEspectaculo
 	 */
 	public int getIdEspectaculo() {
@@ -50,6 +69,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Sets the id espectaculo.
+	 *
 	 * @param idEspectaculo the idEspectaculo to set
 	 */
 	public void setIdEspectaculo(int idEspectaculo) {
@@ -61,6 +82,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Gets the nombre espectaculo.
+	 *
 	 * @return the nombreEspectaculo
 	 */
 	public String getNombreEspectaculo() {
@@ -72,6 +95,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Sets the nombre espectaculo.
+	 *
 	 * @param nombreEspectaculo the nombreEspectaculo to set
 	 */
 	public void setNombreEspectaculo(String nombreEspectaculo) {
@@ -83,6 +108,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Gets the fecha inicio.
+	 *
 	 * @return the fechaInicio
 	 */
 	public LocalDate getFechaInicio() {
@@ -94,6 +121,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Sets the fecha inicio.
+	 *
 	 * @param fechaInicio the fechaInicio to set
 	 */
 	public void setFechaInicio(LocalDate fechaInicio) {
@@ -105,6 +134,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Gets the fecha fin.
+	 *
 	 * @return the fechaFin
 	 */
 	public LocalDate getFechaFin() {
@@ -116,6 +147,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Sets the fecha fin.
+	 *
 	 * @param fechaFin the fechaFin to set
 	 */
 	public void setFechaFin(LocalDate fechaFin) {
@@ -127,6 +160,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Gets the precio entrada.
+	 *
 	 * @return the precioEntrada
 	 */
 	public double getPrecioEntrada() {
@@ -138,6 +173,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Sets the precio entrada.
+	 *
 	 * @param precioEntrada the precioEntrada to set
 	 */
 	public void setPrecioEntrada(double precioEntrada) {
@@ -149,6 +186,8 @@ public class Espectaculos {
 
 
 	/**
+	 * Gets the aforo.
+	 *
 	 * @return the aforo
 	 */
 	public int getAforo() {
@@ -160,10 +199,26 @@ public class Espectaculos {
 
 
 	/**
+	 * Sets the aforo.
+	 *
 	 * @param aforo the aforo to set
 	 */
 	public void setAforo(int aforo) {
 		this.aforo = aforo;
+	}
+
+
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Espectaculos [idEspectaculo=" + idEspectaculo + ", nombreEspectaculo=" + nombreEspectaculo
+				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precioEntrada=" + precioEntrada
+				+ ", aforo=" + aforo + "]";
 	}
 	
 	

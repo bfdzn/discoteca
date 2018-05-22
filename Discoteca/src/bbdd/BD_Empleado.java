@@ -9,18 +9,35 @@ import modelos.Empleado;
 
 import java.time.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BD_Empleado.
+ */
 public class BD_Empleado extends BD_Conector {
 
+	/** The s. */
 	private static Statement s;
+	
+	/** The reg. */
 	private static ResultSet reg;
 
+	/**
+	 * Instantiates a new b D empleado.
+	 *
+	 * @param file the file
+	 */
 	public BD_Empleado(String file) {
 		super(file);
 	}
 	
+	/**
+	 * Añadir empleado.
+	 *
+	 * @param al the al
+	 * @return the int
+	 */
 	public  int añadir_Empleado( Empleado al){	
-		String cadenaSQL="INSERT INTO empleados2 VALUES('" + al.getDni() + "','" +
-		al.getDni()+"','"+ al.getNombre() +"','"+ al.getApellido()+"','"+
+		String cadenaSQL="INSERT INTO empleados2 VALUES('" + al.getDni() + "','"+ al.getNombre() +"','"+ al.getApellido()+"','"+
 				al.getOficio()+"','"+al.getFechaAlta()+"','"+al.getContraseña()+"','"+al.getPrecioHora()+"')"; 	
 		
 		try{
@@ -41,6 +58,13 @@ public class BD_Empleado extends BD_Conector {
 	
 	
 
+	/**
+	 * Buscar empleado.
+	 *
+	 * @param dni the dni
+	 * @param contraseña the contraseña
+	 * @return the empleado
+	 */
 	public Empleado buscarEmpleado(String dni, String contraseña) {
 		String cadenaSQL = "SELECT * from empleados2 WHERE DNI_EMPLEADO='" + dni + "'";
 		System.out.println("Hola");
@@ -82,6 +106,12 @@ public class BD_Empleado extends BD_Conector {
 		}
 	}
 
+	/**
+	 * Borrar empleado.
+	 *
+	 * @param dni the dni
+	 * @return the int
+	 */
 	public int borrarEmpleado(String dni) {
 		String cadena = "DELETE FROM empleados2 WHERE nombre='" + dni.toUpperCase() + "'";
 
