@@ -14,7 +14,7 @@ public class Reserva_sala {
 	private int precio;
 	private String dni_cliente;
 	
-	BD_reserva_sala bd=new BD_reserva_sala("prueba.txt");
+	BD_reserva_sala bd=new BD_reserva_sala("mysql-properties.xml.txt");
 	
 	
 	
@@ -44,27 +44,7 @@ public class Reserva_sala {
 			this.precio = (dias_reserva*800);
 	}
 	
-	/**
-	 * 
-	 * @param vendedor
-	 * @param fecha_inicio
-	 * @param fecha_fin
-	 * @param dni_cliente
-	 * @param id_espectaculo
-	 * @param precio
-	 */
-	public Reserva_sala( String vendedor, LocalDate fecha_inicio, LocalDate fecha_fin,
-			String dni_cliente, int id_espectaculo,int precio) {
-		super();
-		
-		this.id_espectaculo = id_espectaculo;
-		this.vendedor = vendedor;
-		this.fecha_inicio = fecha_inicio;
-		this.fecha_fin = fecha_fin;
-		this.dni_cliente = dni_cliente;
-		int dias_reserva=fecha_fin.compareTo(fecha_inicio);
-		this.precio = precio;
-	}
+
 
 	/**
 	 * @return the id_espectaculo
