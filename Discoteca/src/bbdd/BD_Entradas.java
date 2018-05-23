@@ -49,7 +49,6 @@ public class BD_Entradas extends BD_Conector {
 			cadenaSQL = "INSERT INTO entradas2 VALUES('" + entrada.getNumEntrada() + "','" + entrada.getDniEntrada()
 			+ "','" + entrada.getIdEspectaculo() + "','" + entrada.getFecha() + "', null)";
 		}
-		System.out.println(cadenaSQL);
 		try {
 			this.abrir();
 			s = c.createStatement();
@@ -65,10 +64,10 @@ public class BD_Entradas extends BD_Conector {
 
 	/**
 	 * Borrar entrada.
-	 * @deprecated no se está utilizando para mantener la integridad de la bbdd
-	 * @param entrada
-	 *            the entrada
+	 *
+	 * @param entrada            the entrada
 	 * @return the int
+	 * @deprecated no se está utilizando para mantener la integridad de la bbdd
 	 */
 	public int borrar_Entrada(Entradas entrada) {
 		String cadenaSQL = "DELETE FROM ENTRADAS2 WHERE idEspectaculo = ' " + entrada.getIdEspectaculo() + "'";
@@ -97,7 +96,6 @@ public class BD_Entradas extends BD_Conector {
 	public Vector<Entradas> Listar_entradas_mes(String mesAno) {
 		
 		String cadenaSQL = "SELECT * from entradas2 WHERE DATE_FORMAT(FECHA,'%m%Y')='" + mesAno + "'";
-		System.out.println(cadenaSQL);
 		Vector<Entradas> listar_entradas = new Vector<Entradas>();
 		try {
 			this.abrir();
@@ -128,7 +126,6 @@ public class BD_Entradas extends BD_Conector {
 	 */
 	public int numeroEntrada(int id, LocalDate fecha) {
 		String cadenaSQL = "SELECT MAX(NUMENTRADA) ENT FROM ENTRADAS2 WHERE idEspectaculo ='" + id + "' AND FECHA = '"+fecha+"'";
-		System.out.println(cadenaSQL);
 		try {
 			int maxEntrada = 0;
 			this.abrir();
@@ -139,7 +136,6 @@ public class BD_Entradas extends BD_Conector {
 			}
 			s.close();
 			this.cerrar();
-			System.out.println(maxEntrada);
 			return maxEntrada;
 		} catch (SQLException e) {
 			System.out.println(e);

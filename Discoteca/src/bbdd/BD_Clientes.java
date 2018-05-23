@@ -10,7 +10,7 @@ import modelos.*;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class BD_Clientes.
+ * The Class BD_Clientes. La clase que conecta los clientes a la bbdd
  */
 public class BD_Clientes extends BD_Conector{
 	
@@ -33,8 +33,8 @@ public class BD_Clientes extends BD_Conector{
 	/**
 	 * Añade un cliente a la bbdd.
 	 *
-	 * @param cliente the cliente
-	 * @return the int
+	 * @param cliente a insertar
+	 * @return the int con lo que ha hecho la bbdd
 	 */
 	public  int añadir_Cliente( Clientes cliente){	
 		String cadenaSQL="INSERT INTO CLIENTES2 VALUES('" + cliente.getDni() + "','" +

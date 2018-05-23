@@ -1,0 +1,3 @@
+En el mes de Mayo se debe este dinero: 
+Al empleado con dni 00000000A se le debe 420.0por estas horas: 42
+Al empleado con dni 3 se le debe 60.0por estas horas: 6

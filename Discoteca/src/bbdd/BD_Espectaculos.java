@@ -62,10 +62,9 @@ public class BD_Espectaculos extends BD_Conector {
 	/**
 	 * Borrar espectaculo.
 	 *
-	 *@deprecated se trata de un metodo que no estamos utilizando para no violar la integridad de la tabla
 	 * @param espectaculo se le pasa un espectáculo
-	 * 
 	 * @return devuelve un int que nos dirá se si ha borrado o no de la bbdd
+	 * @deprecated se trata de un metodo que no estamos utilizando para no violar la integridad de la tabla
 	 */
 	public int borrar_Espectaculo(Espectaculos espectaculo) {
 
@@ -219,8 +218,8 @@ public class BD_Espectaculos extends BD_Conector {
 	/**
 	 * Buscar espectaculo.
 	 *
-	 * @param el id de espectaculo
-	 * @return el objeto espectaculo con esa idespectaculo
+	 * @param espectaculo id de espectaculo
+	 * @return buscarEspectaculo el objeto espectaculo con esa idespectaculo
 	 * @throws EspectaculoNoExiste si el espectaculo no existe
 	 *             the espectaculo no existe
 	 */
@@ -256,11 +255,11 @@ public class BD_Espectaculos extends BD_Conector {
 	/**
 	 * Modificar fecha espectaculo.
 	 *
-	 * @deprecated no se está utilizando
-	 * @param  espectaculo
-	 * @param fechaInicio
-	 * @param fechaFin
+	 * @param espectaculo the espectaculo
+	 * @param fechaInicio fechaInicio del espectaculo
+	 * @param fechaFin fechaFin del espectaculo
 	 * @return the int
+	 * @deprecated no se está utilizando
 	 */
 	public int modificar_FechaEspectaculo(Espectaculos espectaculo, LocalDate fechaInicio, LocalDate fechaFin) {
 		String cadenaSQL = "UPDATE ESPECTACULOS2 SET fecha_inicion ='" + fechaInicio + "','" + "fecha_fin= '" + fechaFin

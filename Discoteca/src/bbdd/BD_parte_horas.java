@@ -2,6 +2,14 @@
 
 package bbdd;
 
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.WRITE;
+
+import java.io.BufferedWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -129,6 +137,49 @@ public class BD_parte_horas extends BD_Conector{
 			System.err.println(e);
 			return null;			
 		}
+	}
+	
+	/**
+	 * Generar texto.
+	 * Genera un txt de un mes específico 
+	 * @param anoFecha año y mes del que se quiere generar un txt
+	 */
+	public void generarTexto (String anoFecha) {
+		String cadenaSQL="SELECT sum(salario) importe, sum(horas) horaT, dni_empleado "
+				+ "FROM `parte_horas2` where DATE_FORMAT(FECHA,'%m%Y') = '"+anoFecha+"' group by dni_empleado";
+		String [] meses = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+		Charset charset = Charset.forName("UTF-8");
+		String ruta = meses[Integer.parseInt(anoFecha.substring(0,2))-1]+".txt";
+		Path p = Paths.get(ruta);
+
+		
+		
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			BufferedWriter writer = Files.newBufferedWriter(p, charset);
+			String linea = "";
+			linea = "En el mes de "+meses[Integer.parseInt(anoFecha.substring(0,2))-1]+" se debe este dinero: ";
+			writer.write(linea);
+			writer.newLine();
+			writer.newLine();
+			while ( reg.next()){
+				linea = "Al empleado con dni "+reg.getString("dni_empleado")+" se le debe "+reg.getDouble("importe")+
+						" por estas horas: "+reg.getInt("horaT");
+				writer.write(linea);
+				writer.newLine();
+				}
+			writer.close();
+			s.close();
+			this.cerrar();
+	
+		}
+		catch ( Exception e){	
+			System.err.println(e);
+					
+		}
+
 	}
 	
 

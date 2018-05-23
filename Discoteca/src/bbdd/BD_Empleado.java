@@ -11,7 +11,8 @@ import java.time.*;
 
 // TODO: Auto-generated Javadoc
 /**
- * La clase que contiene los métodos que conectan con la base de datos empleado
+ * The Class BD_Empleados.
+ * La clase que contiene los métodos que conectan con la base de datos empleado.
  */
 public class BD_Empleado extends BD_Conector {
 
@@ -22,7 +23,7 @@ public class BD_Empleado extends BD_Conector {
 	private static ResultSet reg;
 
 	/**
-	 * Constructor empleado
+	 * Constructor empleado.
 	 *
 	 * @param file the file
 	 */
@@ -59,7 +60,7 @@ public class BD_Empleado extends BD_Conector {
 	
 
 	/**
-	 * Buscar empleado un método que busca un Empleado en la bbdd y coteja su dni con la contraseña almacenada
+	 * Buscar empleado un método que busca un Empleado en la bbdd y coteja su dni con la contraseña almacenada.
 	 *
 	 * @param dni de empleado
 	 * @param contraseña la contraseña de empleado
@@ -67,8 +68,7 @@ public class BD_Empleado extends BD_Conector {
 	 */
 	public Empleado buscarEmpleado(String dni, String contraseña) {
 		String cadenaSQL = "SELECT * from empleados2 WHERE DNI_EMPLEADO='" + dni + "'";
-		System.out.println("Hola");
-		System.out.println(cadenaSQL);
+		
 		Empleado retorno = null;
 		try {
 			this.abrir();
@@ -108,9 +108,10 @@ public class BD_Empleado extends BD_Conector {
 
 	/**
 	 * Borrar empleado.
-	 * @deprecated es una metodo que no se está utilizando, para versiones futuras
+	 *
 	 * @param dni the dni
 	 * @return the int
+	 * @deprecated es una metodo que no se está utilizando, para versiones futuras
 	 */
 	public int borrarEmpleado(String dni) {
 		String cadena = "DELETE FROM empleados2 WHERE nombre='" + dni.toUpperCase() + "'";

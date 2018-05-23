@@ -39,12 +39,9 @@ public class Principal {
 		DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("dd/LL/yyyy");
 
 		int opcion = 0;
-		
-		
-		
-		
+
 		while (opcion != 1 && opcion != 2) {
-			System.out.println("1.Solicitar entrada");
+			System.out.println("1.Cliente");
 			System.out.println("2.Iniciar sesión");
 			opcion = sc.nextInt();
 			sc.nextLine();
@@ -105,17 +102,17 @@ public class Principal {
 							}
 							System.out.println("Introduce el dni del comprador");
 							String dniEntrada = sc.nextLine();
-							
+
 							int numEntradas = 4;
-							while(numEntradas > 3) {
+							while (numEntradas > 3) {
 								System.out.println("Introduce el número de entradas que quieres, 3 como máximo");
 								numEntradas = sc.nextInt();
-							 	sc.nextLine();
-							
+								sc.nextLine();
+
 							}
-							
+
 							for (int i = 0; i < numEntradas; i++) {
-								
+
 								int numEntrada = bdentradas.numeroEntrada(idEntradaEspect, fecha);
 								if (especEntrada.getAforo() == numEntrada) {
 									System.out.println("El espectáculo tiene el aforo completo");
@@ -123,7 +120,6 @@ public class Principal {
 								} else {
 									numEntrada = numEntrada + 1;
 									System.out.println(numEntrada);
-									
 
 									Entradas altaEntrada = new Entradas(numEntrada, idEntradaEspect, dniEntrada, fecha,
 											null);
@@ -157,8 +153,7 @@ public class Principal {
 						}
 
 					}
-					
-					
+
 					LocalDate fechaF = null;
 					boolean validarFechaF = false;
 					while (validarFechaF == false) {
@@ -177,31 +172,30 @@ public class Principal {
 					}
 					System.out.println("Introduce dni cliente");
 					String dniCliente = sc.nextLine();
-					
+
 					Clientes clienteS = bdclientes.buscarCliente(dniCliente);
-					if(clienteS == null) {
+					if (clienteS == null) {
 						LocalDate fechaN = null;
-						while(fechaN == null) {
+						while (fechaN == null) {
 							System.out.println("Introduzca fecha nacimiento");
 							String fechaNacimiento = sc.nextLine();
 							fechaN = fechaformateada(fechaNacimiento);
 							clienteS = new Clientes(dniCliente, fechaN);
 							filas = bdclientes.añadir_Cliente(clienteS);
-							if(filas == 0) {
+							if (filas == 0) {
 								System.out.println("Cliente añadido");
-							}else if(filas == -1){
+							} else if (filas == -1) {
 								System.out.println("Problemas técnicos");
-							}else {
+							} else {
 								System.out.println("Cliente añadido");
 							}
 						}
 					}
-							
-					
+
 					Reserva_sala alta = new Reserva_sala(fechaInicioR, fechaF, null, clienteS.getDni());
 					bdreserva.añadir_reserva(alta);
-					break;					
-					
+					break;
+
 				}
 
 			}
@@ -228,9 +222,9 @@ public class Principal {
 				while (opcion != 6) {
 					System.out.println("Introduce opción");
 					System.out.println("1.Alta espectáculo/Listar espectáculos");
-					System.out.println("2.Alta/Baja alquiler sala");
-					System.out.println("3.Revisar informe de horas");
-					System.out.println("4.Revisar facturación por mes");
+					System.out.println("2.Alta/Listar reservas");
+					System.out.println("3.Revisar informe de horas individual/Crear factura");
+					System.out.println("4.Revisar venta de entradas mes");
 					System.out.println("5.Alta Empleado");
 					System.out.println("6.Salir programa");
 					opcion = sc.nextInt();
@@ -248,7 +242,7 @@ public class Principal {
 							sc.nextLine();
 							switch (opcion) {
 							case 1:
-								int idEspectaculo = bdespectaculos.buscarMax()+1;
+								int idEspectaculo = bdespectaculos.buscarMax() + 1;
 								System.out.println("Introduce nombre de espectáculo");
 								String nombreEspectaculo = sc.nextLine();
 								LocalDate fechaInicio = null;
@@ -332,16 +326,16 @@ public class Principal {
 						}
 					case 2:// Alta baja alquiler/listar reservas
 						opcion = 0;
-						while(opcion != 3) {
+						while (opcion != 3) {
 							System.out.println("1.Añadir reserva");
 							System.out.println("2.Listar reservas");
 							System.out.println("3.Salir ventana");
 							opcion = sc.nextInt();
 							sc.nextLine();
-							
-							switch(opcion) {
+
+							switch (opcion) {
 							case 1:
-								
+
 								LocalDate fechaInicioR = null;
 								while (fechaInicioR == null) {
 									System.out.println("Introduce fecha inicio en el siguiente formato dd/LL/yyyy");
@@ -353,8 +347,7 @@ public class Principal {
 									}
 
 								}
-								
-								
+
 								LocalDate fechaF = null;
 								boolean validarFechaF = false;
 								while (validarFechaF == false) {
@@ -373,71 +366,99 @@ public class Principal {
 								}
 								System.out.println("Introduce dni cliente");
 								String dniCliente = sc.nextLine();
-								
+
 								Clientes clienteS = bdclientes.buscarCliente(dniCliente);
-								if(clienteS == null) {
+								if (clienteS == null) {
 									LocalDate fechaN = null;
-									while(fechaN == null) {
+									while (fechaN == null) {
 										System.out.println("Introduzca fecha nacimiento");
 										String fechaNacimiento = sc.nextLine();
 										fechaN = fechaformateada(fechaNacimiento);
 										clienteS = new Clientes(dniCliente, fechaN);
 										filas = bdclientes.añadir_Cliente(clienteS);
-										if(filas == 0) {
+										if (filas == 0) {
 											System.out.println("Cliente añadido");
-										}else if(filas == -1){
+										} else if (filas == -1) {
 											System.out.println("Problemas técnicos");
-										}else {
+										} else {
 											System.out.println("Cliente añadido");
 										}
 									}
 								}
-										
-								
-								Reserva_sala alta = new Reserva_sala(fechaInicioR, fechaF, usuario.getDni(), clienteS.getDni());
+
+								Reserva_sala alta = new Reserva_sala(fechaInicioR, fechaF, usuario.getDni(),
+										clienteS.getDni());
 								bdreserva.añadir_reserva(alta);
 								break;
 
 							case 2:
 								System.out.println("Listando reserva");
-								Vector <Reserva_sala> salas = bdreserva.Listar_reserva();
-								for(int i=0 ; i<salas.size() ;i++) {
+								Vector<Reserva_sala> salas = bdreserva.Listar_reserva();
+								for (int i = 0; i < salas.size(); i++) {
 									System.out.println(salas.get(i).toString());
 								}
 							case 3:
 								System.out.println("Saliendo ventana");
 								break;
 							}
-							
-							
+
 						}
-						
-						
+
 						break;
 					case 3: // Control del informe de horas
-						System.out.println("Introduzca el mes y el año del cuál quiere sacar el parte de horas");
-						System.out.println("Introduce el mes");
-						String mesfp = sc.nextLine();
-						if (mesfp.length() == 1) {
-							mesfp = '0' + mesfp;
+						opcion = 0;
+						while (opcion != 3) {
+							System.out.println("1.Listar parte de horas individual");
+							System.out.println("2.Generar archivo con los importes a pagar a cada empleado en el mes");
+							System.out.println("3.Salir ventana");
+							opcion = sc.nextInt();
+							sc.nextLine();
+							switch (opcion) {
+
+							case 1:
+								System.out
+										.println("Introduzca el mes y el año del cuál quiere sacar el parte de horas");
+								System.out.println("Introduce el mes");
+								String mesfp = sc.nextLine();
+								if (mesfp.length() == 1) {
+									mesfp = '0' + mesfp;
+								}
+								System.out.println("Introduce el año");
+								String anofp = sc.nextLine();
+								String mesAnoP = mesfp + anofp;
+
+								System.out.println("Introduzca el dni del empleado del cuál quiere listar las horas");
+								String dniListar = sc.nextLine();
+								double[] parteMes = bdhoras.Listar_parte_horas_mes_dni(mesAnoP, dniListar);
+								if (parteMes == null) {
+									System.out.println("Fallo del sistema");
+								} else {
+
+									System.out.println("Al empleado con dni: " + dniListar + "le corresponden: ");
+									System.out.println(parteMes[0] + " euros por");
+									System.out.println(parteMes[1] + " horas.");
+								}
+								break;
+
+							case 2:
+								System.out
+										.println("Introduzca el mes y el año del cuál quiere sacar el archivo");
+								System.out.println("Introduce el mes");
+								String mestxt = sc.nextLine();
+								if (mestxt.length() == 1) {
+									mestxt = '0' + mestxt;
+								}
+								System.out.println("Introduce el año");
+								String anotxt = sc.nextLine();
+								String mesAnotxt = mestxt + anotxt;
+								bdhoras.generarTexto(mesAnotxt);
+								
+								break;
+
+							}
+
 						}
-						System.out.println("Introduce el año");
-						String anofp = sc.nextLine();
-						String mesAnoP = mesfp + anofp;
 
-						System.out.println("Introduzca el dni del empleado del cuál quiere listar las horas");
-						String dniListar = sc.nextLine();
-						double[] parteMes = bdhoras.Listar_parte_horas_mes_dni(mesAnoP, dniListar);
-						if (parteMes == null) {
-							System.out.println("Fallo del sistema");
-						} else {
-
-							System.out.println("Al empleado con dni: " + dniListar + "le corresponden: ");
-							System.out.println(parteMes[0] + " euros por");
-							System.out.println(parteMes[1] + " horas.");
-						}
-
-						break;
 					case 4:// Revisar la facturación mensual
 						System.out.println("Introduce el mes");
 						String mesf = sc.nextLine();
@@ -521,7 +542,7 @@ public class Principal {
 
 					switch (opcion) {
 					case 1:// Mandar un informe de horas
-						/*
+						/**
 						 * Solo se puede generar un parte de horas por día estamos controlando por tanto
 						 * que la sala solo tiene un espectáculo si quisieramos fichar en distintas
 						 * horas habría que insertar un autonúmerico en la tabla de parte_horas
@@ -629,11 +650,11 @@ public class Principal {
 	}
 
 	/**
-	 * Fechaformateada.
-	 *
+	 * Fechaformateada. metodo que formatea fechas
+	 * 
 	 * @param fecha
-	 *            the fecha
-	 * @return the local date
+	 *            en formato string
+	 * @return the local date de la fecha
 	 * @throws DateTimeParseException
 	 *             the date time parse exception
 	 */
@@ -651,9 +672,10 @@ public class Principal {
 	}
 
 	/**
-	 * Listar espectaculos.
-	 *
-	 * @param bdespectaculos the bdespectaculos
+	 * Listar espectaculos. lista todos los espectáculos
+	 * 
+	 * @param bdespectaculos
+	 *            the bdespectaculos
 	 */
 	public static void listarEspectaculos(BD_Espectaculos bdespectaculos) {
 		Vector<Espectaculos> listarEspectaculos = bdespectaculos.listarEspectaculos();
@@ -664,9 +686,10 @@ public class Principal {
 	}
 
 	/**
-	 * Listar espectaculos F.
-	 *
-	 * @param bdespectaculos the bdespectaculos
+	 * Listar espectaculos F. lista los espectáculos que son después de la fecha
+	 * 
+	 * @param bdespectaculos
+	 *            espectaculos que son después de la fecha
 	 */
 	public static void listarEspectaculosF(BD_Espectaculos bdespectaculos) {
 		Vector<Espectaculos> listarEspectaculos = bdespectaculos.listarEspectaculos();
