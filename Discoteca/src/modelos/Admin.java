@@ -1,4 +1,4 @@
-//Borja Fernández Nava
+//Borja FernÃ¡ndez Nava
 package modelos;
 
 import java.time.LocalDate;
@@ -18,11 +18,11 @@ public class Admin extends Empleado {
 	 * @param apellido the apellido
 	 * @param oficio the oficio
 	 * @param fechaAlta the fecha alta
-	 * @param contraseña the contraseña
+	 * @param contraseÃ±a the contraseÃ±a
 	 * @param precioHora the precio hora
 	 */
-	public Admin(String dni, String nombre, String apellido, String oficio, LocalDate fechaAlta, String contraseña,double precioHora) {
-		super(dni, nombre, apellido, oficio, fechaAlta, contraseña, precioHora);
+	public Admin(String dni, String nombre, String apellido, String oficio, LocalDate fechaAlta, String contraseÃ±a,double precioHora) {
+		super(dni, nombre, apellido, oficio, fechaAlta, contraseÃ±a, precioHora);
 		// TODO Auto-generated constructor stub 
 		//frvgs
 	}

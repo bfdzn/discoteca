@@ -3,6 +3,7 @@ package modelos;
 import java.time.LocalDate;
 
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Entradas.
