@@ -1,3 +1,4 @@
+//Borja Fernández Nava
 package bbdd;
 /*
  * 
@@ -12,17 +13,35 @@ import java.nio.file.Paths;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BD_Conector. es la clase principal que conecta el programa con la bdd
+ */
 public class BD_Conector{
 	
+	/** The usuario. */
 	private String usuario;
+	
+	/** The pass. */
 	private String pass;
+	
+	/** The url. */
 	private String url;
+	
+	/** The c. */
 	protected Connection c;
 	
+	/** The driver. */
 	private String driver;
 	
+	/** The prop. */
 	Properties prop;
 	
+	/**
+	 * Instantiates a new b D conector.
+	 *
+	 * @param fileName the file name
+	 */
 	public BD_Conector(String fileName) {	
 	   try{
 		Properties prop = new Properties();
@@ -39,13 +58,7 @@ public class BD_Conector{
 		
 		url="jdbc:" + dbms + "://"+ serverName + ":" + portNumber + "/" + dbName;
 		
-		System.out.println("Set the following properties:");
-		System.out.println("dbms: " + dbms);
-		System.out.println("driver: " + driver);
-		System.out.println("dbName: " + dbName);
-		System.out.println("userName: " + usuario);
-		System.out.println("serverName: " + serverName);
-		System.out.println("portNumber: " + portNumber);
+		
 		
 		
 	   }catch(FileNotFoundException e){
@@ -59,6 +72,9 @@ public class BD_Conector{
 
 	}
 	
+	/**
+	 * Abrir. Método que abre la conexión
+	 */
 	public void abrir(){
 		try{
 			Class.forName(driver);
@@ -76,6 +92,9 @@ public class BD_Conector{
 	}	
 	
 
+	/**
+	 * Cerrar. Método que cierra la conexión
+	 */
 	public void cerrar(){
 		try{
 			if (c!=null){
