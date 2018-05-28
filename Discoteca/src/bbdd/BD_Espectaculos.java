@@ -1,3 +1,4 @@
+//Samuel de la torre
 package bbdd;
 
 import java.sql.*;
@@ -12,7 +13,7 @@ import modelos.Espectaculos;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BD_Espectaculos.
- * La clase que conecta la bbdd a los espect·culos
+ * La clase que conecta la bbdd a los espect√°culos
  */
 public class BD_Espectaculos extends BD_Conector {
 
@@ -34,13 +35,13 @@ public class BD_Espectaculos extends BD_Conector {
 	}
 
 	/**
-	 * AÒadir espectaculo.
-	 * metodo que aÒade espectaculos en la bbdd
-	 * @param espectaculo se trata del espect·culo que vamos a aÒadir a la bbdd
+	 * A√±adir espectaculo.
+	 * metodo que a√±ade espectaculos en la bbdd
+	 * @param espectaculo se trata del espect√°culo que vamos a a√±adir a la bbdd
 	 *            
-	 * @return devuelve un int que es -1 en caso de que la bbdd tenga un error o 1 si aÒade el empleado
+	 * @return devuelve un int que es -1 en caso de que la bbdd tenga un error o 1 si a√±ade el empleado
 	 */
-	public int aÒadir_Espectaculo(Espectaculos espectaculo) {
+	public int a√±adir_Espectaculo(Espectaculos espectaculo) {
 		String cadenaSQL = "INSERT INTO ESPECTACULOS2 VALUES('" + espectaculo.getIdEspectaculo() + "','"
 				+ espectaculo.getNombreEspectaculo() + "','" + espectaculo.getFechaInicio() + "','"
 				+ espectaculo.getFechaFin() + "','" + espectaculo.getPrecioEntrada() + "','" + espectaculo.getAforo()
@@ -62,8 +63,8 @@ public class BD_Espectaculos extends BD_Conector {
 	/**
 	 * Borrar espectaculo.
 	 *
-	 * @param espectaculo se le pasa un espect·culo
-	 * @return devuelve un int que nos dir· se si ha borrado o no de la bbdd
+	 * @param espectaculo se le pasa un espect√°culo
+	 * @return devuelve un int que nos dir√° se si ha borrado o no de la bbdd
 	 * @deprecated se trata de un metodo que no estamos utilizando para no violar la integridad de la tabla
 	 */
 	public int borrar_Espectaculo(Espectaculos espectaculo) {
@@ -86,11 +87,11 @@ public class BD_Espectaculos extends BD_Conector {
 
 	/**
 	 * Buscar fecha.
-	 * Se trata de un metodo cuya funciÛn es buscar que los espect·culos no se solapen en el tiempo.
+	 * Se trata de un metodo cuya funci√≥n es buscar que los espect√°culos no se solapen en el tiempo.
 	 *
 	 * @param fechaInicio del espectaculo
-	 * @param fechaFin del espect·culo
-	 * @return si retorna 0 hay espect·culos que se solapan, si retorna 1 hay hueco, si retorna 2 hay un error en la bbdd
+	 * @param fechaFin del espect√°culo
+	 * @return si retorna 0 hay espect√°culos que se solapan, si retorna 1 hay hueco, si retorna 2 hay un error en la bbdd
 	 */
 	public int buscarFecha(LocalDate fechaInicio, LocalDate fechaFin) {
 		String cadenaSQL = "SELECT FECHA_INICIO, FECHA_FIN from espectaculos2";
@@ -123,7 +124,7 @@ public class BD_Espectaculos extends BD_Conector {
 	 * Listar espectaculos.
 	 * Se trata de un metodo que lista todos los espectaculos
 	 *
-	 * @return retorna un vector con todos los espect·culos
+	 * @return retorna un vector con todos los espect√°culos
 	 */
 	public Vector<Espectaculos> listarEspectaculos() {
 
@@ -179,7 +180,7 @@ public class BD_Espectaculos extends BD_Conector {
 			}
 			s.close();
 			this.cerrar();
-			throw new EspectaculoNoExiste("El espect·culo no existe en la BBDD");
+			throw new EspectaculoNoExiste("El espect√°culo no existe en la BBDD");
 		} catch (SQLException e) {
 
 			return -1;
@@ -189,8 +190,8 @@ public class BD_Espectaculos extends BD_Conector {
 
 	/**
 	 * Buscar max.
-	 * metodo que busca el m·ximo valor de idespectaculos de la bbdd
-	 * @return un int que ser· utilizado como primary key
+	 * metodo que busca el m√°ximo valor de idespectaculos de la bbdd
+	 * @return un int que ser√° utilizado como primary key
 	 */
 	public int buscarMax(){
 
@@ -244,7 +245,7 @@ public class BD_Espectaculos extends BD_Conector {
 			}
 			s.close();
 			this.cerrar();
-			throw new EspectaculoNoExiste("El espect·culo no existe en la BBDD");
+			throw new EspectaculoNoExiste("El espect√°culo no existe en la BBDD");
 		} catch (SQLException e) {
 
 			return null;
@@ -259,7 +260,7 @@ public class BD_Espectaculos extends BD_Conector {
 	 * @param fechaInicio fechaInicio del espectaculo
 	 * @param fechaFin fechaFin del espectaculo
 	 * @return the int
-	 * @deprecated no se est· utilizando
+	 * @deprecated no se est√° utilizando
 	 */
 	public int modificar_FechaEspectaculo(Espectaculos espectaculo, LocalDate fechaInicio, LocalDate fechaFin) {
 		String cadenaSQL = "UPDATE ESPECTACULOS2 SET fecha_inicion ='" + fechaInicio + "','" + "fecha_fin= '" + fechaFin
