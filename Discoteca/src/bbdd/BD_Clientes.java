@@ -1,3 +1,4 @@
+//Enrique Zarco
 package bbdd;
 
 import java.sql.*;
@@ -31,12 +32,12 @@ public class BD_Clientes extends BD_Conector{
 	}
 
 	/**
-	 * Añade un cliente a la bbdd.
+	 * AÃ±ade un cliente a la bbdd.
 	 *
 	 * @param cliente a insertar
 	 * @return the int con lo que ha hecho la bbdd
 	 */
-	public  int añadir_Cliente( Clientes cliente){	
+	public  int aÃ±adir_Cliente( Clientes cliente){	
 		String cadenaSQL="INSERT INTO CLIENTES2 VALUES('" + cliente.getDni() + "','" +
 		cliente.getFechaNacimiento()+"')"; 	
 		
