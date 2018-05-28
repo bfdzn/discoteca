@@ -1,3 +1,4 @@
+/*Samuel de la Torre*/
 package modelos;
 
 import java.time.LocalDate;
