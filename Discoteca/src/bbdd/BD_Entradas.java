@@ -1,3 +1,4 @@
+//Samuel de la Torre
 package bbdd;
 
 import java.sql.ResultSet;
@@ -34,12 +35,12 @@ public class BD_Entradas extends BD_Conector {
 	}
 
 	/**
-	 * AÒadir entrada.
-	 * Metodo que aÒade entrada accediendo al mÈtodo por la ventana de usuario el vendedor ser· declarado a null
-	 * @param entrada que es un Objeto entrada a aÒadir en la bbdd
-	 * @return the int 1 si  se aÒade, 0 sino se aÒade nada y -1 sino;
+	 * A√±adir entrada.
+	 * Metodo que a√±ade entrada accediendo al m√©todo por la ventana de usuario el vendedor ser√° declarado a null
+	 * @param entrada que es un Objeto entrada a a√±adir en la bbdd
+	 * @return the int 1 si  se a√±ade, 0 sino se a√±ade nada y -1 sino;
 	 */
-	public int aÒadir_Entrada(Entradas entrada) {
+	public int a√±adir_Entrada(Entradas entrada) {
 		String cadenaSQL = null;
 		if(!(entrada.getVendedor()==null)) {
 		    cadenaSQL = "INSERT INTO entradas2 VALUES('" + entrada.getNumEntrada() + "','" + entrada.getDniEntrada()
@@ -67,7 +68,7 @@ public class BD_Entradas extends BD_Conector {
 	 *
 	 * @param entrada            the entrada
 	 * @return the int
-	 * @deprecated no se est· utilizando para mantener la integridad de la bbdd
+	 * @deprecated no se est√° utilizando para mantener la integridad de la bbdd
 	 */
 	public int borrar_Entrada(Entradas entrada) {
 		String cadenaSQL = "DELETE FROM ENTRADAS2 WHERE idEspectaculo = ' " + entrada.getIdEspectaculo() + "'";
@@ -120,9 +121,9 @@ public class BD_Entradas extends BD_Conector {
 	/**
 	 * Numero entrada.
 	 * 
-	 * @param id de espect·culo
+	 * @param id de espect√°culo
 	 * @param fecha de compra
-	 * @return devuelve la m·xima entrada del espectaculo en la fecha que se quiere utilizar
+	 * @return devuelve la m√°xima entrada del espectaculo en la fecha que se quiere utilizar
 	 */
 	public int numeroEntrada(int id, LocalDate fecha) {
 		String cadenaSQL = "SELECT MAX(NUMENTRADA) ENT FROM ENTRADAS2 WHERE idEspectaculo ='" + id + "' AND FECHA = '"+fecha+"'";
